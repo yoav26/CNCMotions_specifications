@@ -1,0 +1,37 @@
+// 
+// uplMotions.puh2
+// -------------------------------------
+// 
+// Motion Header file. Includes motion related constants.
+// 
+// Maintainer: Yoav
+// Created at: 04/27/2025 14:20:00
+// version:    1.1.0
+//
+// -------------------------------------
+//
+// The Motion Library provides a comprehensive set of functions for precise motion control.
+// It includes PTP (Point-to-Point) Absolute Motion for moving to specific coordinates,
+// PTP Relative Motion for incremental movements from the current position, PTP Repetitive Absolute for repeated execution of absolute motions,
+// and PTP Repetitive Relative for repeated incremental motions.
+// The JOG Motion function enables continuous movement in a specified direction.
+// Additionally, the library offers configuration functions to set parameters like speed, acceleration,
+// as well as utility functions for tasks such as status monitoring, and error handling, ensuring robust and flexible motion control for various applications.
+
+
+// Motion Modes (related to MotionMode keyword)
+#define MOTION_MODE_JOG     	0
+#define MOTION_MODE_PTP 	    1
+#define MOTION_MODE_PTP_REP     2
+#define MOTION_MODE_CNCA        11
+
+
+
+// Wait Statuses (related to uplWait2EndOfMotion() function)
+// Types
+#define MOTION_STATUS	7
+
+// Values
+#define MOTION_END		0
+
+

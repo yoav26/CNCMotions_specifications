@@ -1,0 +1,146 @@
+// 
+// CNCMotions_specifications.pup2
+// -------------------------------------
+// 
+// Main program file. Includes the program itself.
+// 
+// Created at: 01/25/2026 14:46:00
+// 
+#include CNCMotions_specifications.puh2
+#include uplCNC.puh2
+#include uphGeneralConstants.puh2
+#include uplMotions.puh2
+#include uplUtility.puh2
+// 
+#information   Replace this with information about your program
+#information   Multiple info lines can be placed
+// 
+// Main task (Task 1)
+// ------------------
+// 
+// This is the start point of the program as it is the first line of the code
+// 
+// Dynamic allocation ranges: [Tasks],[Functions],[#definevar],[#definevar:f],[#definevar:l],[#definevar:d]
+//
+
+main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
+	
+	
+	for (aaxis=0; aaxis<5; aaxis++)
+		
+		AChooseAxis[AProgThread] = aaxis
+		PSetPosition, 0
+		
+	end
+	
+// ACNCAClear: clear CNC segment/FIFO state before pushing new commands
+	ACNCAClear
+
+	uplCNCSetSpeedPercent(100)
+	
+// Type 5 / 6 setup
+// uplCNCSetVectorParams(SpeedPercentsInternal=100, VectorAcceleration=1000000, VectorDeceleration=1000000, VectorJerk=0)
+	uplCNCSetVectorParams(CNCAPushParam:100, CNCAPushParam:1000000, CNCAPushParam:1000000, CNCAPushParam:0)
+
+// uplCNCSetCornerParams(CornerRadiusMethod=0, CornerRadiusOrError=1000, MinimalAngleForCorner=5, AxisAccelerationLimitType=0)
+	uplCNCSetCornerParams(0, ll:1000, 5, 0)
+
+// uplMotionCNCLinear6(A=6000, B=7000, C=8000, D=9000, E=10000, F=11000, Speed=20000, EndSpeed=0)
+	uplMotionCNCLinear6(A_AXIS, ll:6000,
+						B_AXIS, ll:7000,
+						C_AXIS, ll:8000,
+						D_AXIS, ll:9000,
+						E_AXIS, ll:10000,
+						F_AXIS, ll:11000,
+						ll:20000, ll:0)
+	
+// uplMotionCNCLinear5(A=5000, B=6000, C=7000, D=8000, E=9000, Speed=20000, EndSpeed=0)
+	uplMotionCNCLinear5(A_AXIS, ll:5000, B_AXIS, ll:6000, C_AXIS, ll:7000, D_AXIS, ll:8000, E_AXIS, ll:9000, ll:20000, ll:0)
+
+// uplMotionCNCLinear4(A=4000, B=5000, C=6000, D=7000, Speed=20000, EndSpeed=0)
+	uplMotionCNCLinear4(A_AXIS, ll:4000, B_AXIS, ll:5000, C_AXIS, ll:6000, D_AXIS, ll:7000, ll:20000, ll:0)
+
+// uplMotionCNCLinear3(A=3000, B=4000, C=5000, Speed=20000, EndSpeed=0)
+	uplMotionCNCLinear3(A_AXIS, ll:3000, B_AXIS, ll:4000, C_AXIS, ll:5000, ll:20000, ll:0)
+
+// uplMotionCNCLinear2(A=2000, B=3000, Speed=20000, EndSpeed=0)
+	uplMotionCNCLinear2(A_AXIS, ll:2000, B_AXIS, ll:3000, ll:20000, ll:0)
+
+// uplCNCAutomaticCornerMotion(A_AXIS, B_AXIS)
+// Inserts an Automatic Corner Motion segment between two linear segments on the same A/B axes.
+	uplCNCAutomaticCornerMotion(A_AXIS, B_AXIS)
+
+// uplMotionCNCLinear2(A=0, B=0, Speed=20000, EndSpeed=0) -> goes to zero
+	uplMotionCNCLinear2(A_AXIS, ll:0, B_AXIS, ll:0, ll:20000, ll:0)
+
+// uplCNCARrcMotion(A,B) end targets (1000,0), center (500,0), Dir=0, cruise=20000, end=0
+	uplCNCARrcMotion(A_AXIS, B_AXIS, ll:100000, ll:0, ll:50000, ll:0, ll:0, ll:20000, ll:0)
+
+// uplCNCSetSpeedPercent(200)
+	uplCNCSetSpeedPercent(200)
+
+// Type 8 / 9 / 12 / 17 / 18 / 21 data and wait helpers
+// uplCNCDOutPortWrite(A_AXIS, DOutPortValue=1)
+	uplCNCDOutPortWrite(A_AXIS, 1)
+
+// uplCNCArrayWrite(ArrayType=0=ARRAY_TYPE_GENDATA, AxisRef=A_AXIS, Index=10, Value=111)
+	uplCNCArrayWrite(A_AXIS, ARRAY_TYPE_GENDATA, 10, CNCAPushParam:111)
+
+// uplCNCWaitUsingUserArray(ArrayType=0=GenData[], AxisRef=A_AXIS, Index=10, TriggerType=2=EqualTo, TriggerValue=111)
+	uplCNCWaitUsingUserArray(0, A_AXIS, 10, 2, CNCAPushParam:111)
+
+// uplCNCArrayWriteMultiple(ArrayType=0=GenData[], AxisRef=A_AXIS, Index=20, Value1..4=1,2,3,4)
+	uplCNCArrayWriteMultiple(A_AXIS, ARRAY_TYPE_GENDATA, 20, CNCAPushParam:1, CNCAPushParam:2, CNCAPushParam:3, CNCAPushParam:4)
+
+// uplCNCArrayWriteMultipleWait(AxisRef=A_AXIS, ArrayType=0=GenData[], Index=30, Value1..4=10,20,30,40, TriggerIndex=30, TriggerType=1=CNC_TRIG_GT, TriggerValue=0)
+	uplCNCArrayWriteMultipleWait(A_AXIS, ARRAY_TYPE_GENDATA, 30, CNCAPushParam:10, CNCAPushParam:20, CNCAPushParam:30, CNCAPushParam:40, 30, CNC_TRIG_GT, CNCAPushParam:0)
+
+// uplCNCWaitInputs(AxisRef=A_AXIS, InputSelection=0=DInPort, Index=1, DInputsMask=-1, TriggerType=0=CNC_TRIG_NONE, TriggerValue=0)
+	uplCNCWaitInput(A_AXIS, INPUT_SELECTION_DIGITAL, 1, ll:-1, CNC_TRIG_NONE, CNCAPushParam:0)
+
+// Type 22 / 23 spatial events
+// uplCNCSpatialEventsSetup(EventAxis=A_AXIS(0=A physical), IsVirtualAxis=0, IsPreconfiguredTbl=0, PulseResolution=1, PulseWidth=10, EventSelect=0)
+	uplCNCSpatialEventsSetup(A_AXIS, 0, 0, 1, 10, 0)
+	
+// uplCNCSpatialEvents(NumEvents=3, EventPos=[1000,2000,3000], remaining params=0)
+	uplCNCSpatialEvents(3, ll:1000, ll:2000, ll:3000, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0, ll:0)
+
+// uplMotionCNCLinear6 -> move all axes to 0
+	uplMotionCNCLinear6(A_AXIS, ll:0, B_AXIS, ll:0, C_AXIS, ll:0, D_AXIS, ll:0, E_AXIS, ll:0, F_AXIS, ll:0, ll:20000, ll:0)
+
+// uplMotionCNCLinear6 -> move all axes to 100000
+	uplMotionCNCLinear6(A_AXIS, ll:100000, B_AXIS, ll:100000, C_AXIS, ll:100000, D_AXIS, ll:100000, E_AXIS, ll:100000, F_AXIS, ll:100000, ll:20000, ll:0)
+
+	AMotorOn=1
+	BMotorOn=1
+	CMotorOn=1
+	DMotorOn=1
+	EMotorOn=1
+	FMotorOn=1
+	
+	AMotionMode=11
+	BMotionMode=11
+	CMotionMode=11
+	DMotionMode=11
+	EMotionMode=11
+	FMotionMode=11
+	
+	ABegin
+
+// Non-segment CNC control helpers (step mode + pause/resume + stop)
+// uplCNCStepModeOn()
+	uplCNCStepModeOn()
+// uplCNCDoStep()
+	uplCNCDoStep()
+// uplCNCDoStep()
+	uplCNCDoStep()
+// uplCNCStepModeOff()
+	uplCNCStepModeOff()
+// uplCNCPause()
+	uplCNCPause()
+// uplCNCResume()
+	uplCNCResume()
+// uplCNCStop()
+	//uplCNCStop()
+	
+endofmain

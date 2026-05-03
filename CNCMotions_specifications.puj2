@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ProjectData>
+	<Name>CNCMotions_specifications</Name>
+	<Files>
+		<File>CNCMotions_specifications.pup2</File>
+		<File>CNCMotions_specifications.puh2</File>
+		<File>uplMotions.pup2</File>
+		<File>uplMotions.puh2</File>
+		<File>uplUtility.pup2</File>
+		<File>uplUtility.puh2</File>
+		<File>uphGeneralConstants.puh2</File>
+		<File>uplCNC.pup2</File>
+		<File>uplCNC.puh2</File>
+	</Files>
+	<WatchRegion>
+		<WatchWindow>
+		</WatchWindow>
+		<WatchWindow>
+		</WatchWindow>
+		<WatchWindow>
+		</WatchWindow>
+	</WatchRegion>
+	<OpenFiles>CNCMotions_specifications.pup2;uplCNC.pup2;uplCNC.puh2;uplMotions.pup2;CNCMotions_specifications.puh2;uphGeneralConstants.puh2;uplMotions.puh2</OpenFiles>
+	<ActiveFile>CNCMotions_specifications.pup2</ActiveFile>
+	<TextZoom>0</TextZoom>
+	<AutocompleteEnabled>True</AutocompleteEnabled>
+	<ExtendedAutocompleteInfo>True</ExtendedAutocompleteInfo>
+	<WarnOnAllocatedGenDataUse>True</WarnOnAllocatedGenDataUse>
+	<AllowRedefinition>False</AllowRedefinition>
+	<AllowLowLevel>False</AllowLowLevel>
+	<AllowLegacyFuncs>False</AllowLegacyFuncs>
+	<NoImpCast>False</NoImpCast>
+	<AllowImpCast>True</AllowImpCast>
+	<AllowImpCastLossy>False</AllowImpCastLossy>
+</ProjectData>

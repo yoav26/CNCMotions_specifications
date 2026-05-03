@@ -1,0 +1,13 @@
+// 
+// CNCMotions_specifications.puh2
+// -------------------------------------
+// 
+// Main header file. Includes definitions for the program.
+// 
+// Created at: 01/25/2026 14:46:00
+// 
+// Place here your constant and variables definitions.
+// 
+#define MY_EXAMPLE1 10000
+// 
+#definevar aaxis

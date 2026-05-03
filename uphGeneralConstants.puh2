@@ -1,0 +1,251 @@
+// 
+// uphGeneralConstant.puh2
+// -------------------------------------
+// 
+// General Header file. Includes general constants; included automatically when using UPL modules
+// 
+// Maintainer: Yoav
+// Created at: 04/27/2025 14:20:00
+// version:    1.2.0
+//
+
+
+
+// Axes Identification
+#define A_AXIS			0
+#define B_AXIS    		1
+#define C_AXIS    		2
+#define D_AXIS    		3
+#define E_AXIS    		4
+#define F_AXIS   		5
+#define G_AXIS    		6
+#define H_AXIS    		7
+
+
+/*
+// Motion mode (glMotionMode) definitions and bits
+#define	MOTION_MODE_INVALID												-1
+#define	MOTION_MODE_JOG													0	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_PTP													1	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_PTP_REP												2	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_PD_DIRECT											3	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_PD_INDIRECT											4	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_GEAR_DIRECT											5	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_GEAR_INDIRECT										6	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_ECAM_DIRECT											7	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_ECAM_INDIRECT										8	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_FIFO												9	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_SLAVE_POSREF										10	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_CNCA												11	// Direct 	(Speed set directly by user through their position commands (Per axis))
+#define	MOTION_MODE_JOYSTICK_POS_DIRECT									12	// Direct 	(Speed set directly by user through their position commands)
+#define	MOTION_MODE_JOYSTICK_POS_INDIRECT								13	// Indirect (Speed set in this mode, not directly by user)
+#define	MOTION_MODE_JOYSTICK_VEL_DIRECT									14	// Direct 	(Speed set directly by user through their velocity commands)
+#define	MOTION_MODE_JOYSTICK_VEL_INDIRECT								15	// Direct 	(Speed set directly by user through their velocity commands)
+#define	MOTION_MODE_VECTOR												16	// Direct 	(Speed set directly by user through their position commands (Per axis))
+#define	MOTION_MODE_CNCB												17	// Direct 	(Speed set directly by user through their position commands (Per axis))
+#define	MOTION_MODE_SPLINE_BUFFER										18	// Direct 	(Speed set directly by user through their position commands (Per axis))
+#define	MOTION_MODE_FIFO_POSITION_TRACKING								19
+#define	LAST_MOTION_MODE												19	// Must be equal to the last motion mode available as it affects the range of MotionMode in Params.h
+*/
+
+
+// Digital input modes related constants (for DInMode)
+#define	USER_INPUT														0
+#define	DEDICATED_HW_FUNCTION											1
+#define	MOTOR_ON_INPUT													2
+#define	BEGIN_MOTION													3
+#define	STOP_MOTION														4
+#define	CLEAR_IN_PULSES													5
+#define	ABORT_RESUME_MOTION												6
+#define	ALARM_RESET														7
+#define	ABORT_MOTION													8
+#define	REV_LIMIT														9
+#define	FWD_LIMIT														10
+#define	TORQUE_LIMIT_ON													11
+#define	ACTIVATE_DYNAMIC_BRAKE											12
+#define	LOCK_STATIC_BRAKE												13
+#define	CONTROL_SET_CHANGE												14
+#define	ADD_FILTER														15
+#define	MODE_SWITCH_VEL_POS												16
+#define	MODE_SWITCH_VEL_CUR												17
+#define	MODE_SWITCH_POS_CUR												18
+#define	CLEAR_ABS_ENC													19
+#define	CHANGE_SPEED													20
+#define	HOME															21
+#define MODE_SWITCH_POS_FORCE                                           22
+#define HALL_A															23	// Assuming B and C are connected just to the next inputs after this one.
+#define FAULT_INPUT														24
+#define HOMING_ON_INPUT													25
+#define FAULT_INPUT_CONTROLLED_STOP										26
+#define HEIDENHAIN_LIMITS												27
+
+
+// Digital outputs (glDOutPort) modes related constants (for DOutMode)
+#define	DOUT_USER_OUTPUT												0
+#define	DOUT_DEDICATED_HW_FUNCTION										1
+#define	DOUT_MOTOR_ON													2
+#define	DOUT_IN_MOTION													3
+#define	DOUT_IN_ACCELERATION											4
+#define	DOUT_IN_DECELERATION											5
+#define	DOUT_IN_CONSTANT_SPEED											6
+#define	DOUT_END_OF_MOTION												7	// TODO: Not implemented
+#define	DOUT_IN_TARGET													8
+#define	DOUT_ALARM														9
+#define	DOUT_WARNINGS_IN_LAST_MOTION									10	// TODO: Not implemented
+#define	DOUT_SATURATIONS_IN_LAST_MOTION									11	// TODO: Not implemented
+#define	DOUT_RLS_FLS_ACTIVE												12
+#define	DOUT_OUT_OF_TRAVEL												13
+#define	DOUT_REGENERATION_ACTIVE										14
+#define	DOUT_DYNAMIC_BRAKE_ACTIVE										15
+#define	DOUT_STATIC_BRAKE_LOCK											16
+#define	DOUT_STATIC_UNUSED												17	// used by BIOEXTRME as watchdog
+#define	DOUT_RLS_ACTIVE													18
+#define	DOUT_FLS_ACTIVE													19
+#define DOUT_HOMING_STAT                                                20
+#define DOUT_FORCE_IN_TARGET                                            21
+#define MAX_OUTPUT_MODE                                                 21
+
+
+// Digital outputs are organized as:
+#define	DOUTPORT_DOUT1_BIT												0x00000001
+#define	DOUTPORT_DOUT2_BIT												0x00000002
+#define	DOUTPORT_DOUT3_BIT												0x00000004
+#define	DOUTPORT_DOUT4_BIT												0x00000008
+#define	DOUTPORT_DOUT5_BIT												0x00000010
+#define	DOUTPORT_DOUT6_BIT												0x00000020
+#define	DOUTPORT_DOUT7_BIT												0x00000040
+#define	DOUTPORT_DOUT8_BIT												0x00000080
+#define	DOUTPORT_DOUT9_BIT												0x00000100
+#define	DOUTPORT_DOUT10_BIT												0x00000200
+#define	DOUTPORT_DOUT11_BIT												0x00000400
+#define	DOUTPORT_DOUT12_BIT												0x00000800
+#define	DOUTPORT_DOUT13_BIT												0x00001000
+#define	DOUTPORT_DOUT1_SET												0x00000001
+#define	DOUTPORT_DOUT2_SET												0x00000002
+#define	DOUTPORT_DOUT3_SET												0x00000004
+#define	DOUTPORT_DOUT4_SET												0x00000008
+#define	DOUTPORT_DOUT5_SET												0x00000010
+#define	DOUTPORT_DOUT6_SET												0x00000020
+#define	DOUTPORT_DOUT7_SET												0x00000040
+#define	DOUTPORT_DOUT8_SET												0x00000080
+#define	DOUTPORT_DOUT9_SET												0x00000100
+#define	DOUTPORT_DOUT10_SET												0x00000200
+#define	DOUTPORT_DOUT11_SET												0x00000400
+#define	DOUTPORT_DOUT12_SET												0x00000800
+#define	DOUTPORT_DOUT13_SET												0x00001000
+#define	DOUTPORT_DOUT1_CLEAR											0xFFFFFFFE
+#define	DOUTPORT_DOUT2_CLEAR											0xFFFFFFFD
+#define	DOUTPORT_DOUT3_CLEAR											0xFFFFFFFB
+#define	DOUTPORT_DOUT4_CLEAR											0xFFFFFFF7
+#define	DOUTPORT_DOUT5_CLEAR											0xFFFFFFEF
+#define	DOUTPORT_DOUT6_CLEAR											0xFFFFFFDF
+#define	DOUTPORT_DOUT7_CLEAR											0xFFFFFFBF
+#define	DOUTPORT_DOUT8_CLEAR											0xFFFFFF7F
+#define	DOUTPORT_DOUT9_CLEAR											0xFFFFFEFF
+#define	DOUTPORT_DOUT10_CLEAR											0xFFFFFDFF
+#define	DOUTPORT_DOUT11_CLEAR											0xFFFFFBFF
+#define	DOUTPORT_DOUT12_CLEAR											0xFFFFF7FF
+#define	DOUTPORT_DOUT13_CLEAR											0xFFFFEFFF
+
+
+// Analog input modes related constants (for AInMode)
+#define	ANALOG_USER_INPUT												0
+#define	ANALOG_VELOCITY_COMMAND											1
+#define	ANALOG_CURRENT_COMMAND											2
+#define	ANALOG_FORCE_FEEDBACK											3
+#define	ANALOG_FORCE_COMMAND											4
+#define	ANALOG_JOYSTICK_INPUT											5
+#define	ANALOG_TORQUE_COMP_INPUT										6
+#define	ANALOG_INPUT_REVERSE_TORQUE_LIMIT								7
+#define	ANALOG_INPUT_FORWARD_TORQUE_LIMIT								8
+#define	ANALOG_INPUT_TACHO_FEEDBACK										9
+#define	ANALOG_INPUT_POSITION_FEEDBACK									10
+
+
+//	Event types (EventType)
+#define	EVENT_TYPE_SINGLE	   											0
+#define	EVENT_TYPE_BY_GAP												1
+#define	EVENT_TYPE_TABLE												2
+#define EVENT_TYPE_TABLE_HARDWARE                                       3
+#define	EVENT_TYPE_TRIG_NOW												4
+#define	EVENT_TYPE_MAX													4
+
+
+// Controller Fault (ConFlt) definitions and bits
+//remvoe-#define	CON_FLT_NONE													0							//"No fault has occurred"
+//remvoe-#define CON_FLT_BASE                                                    1000                        //Base from which ConFlt is incremented
+#define	CON_FLT_ABORT													1001						//"Abort signal was detected"
+#define	CON_FLT_SHORT													1002						//"Short from motor phase to ground"
+#define	CON_FLT_ENCODER_ERROR											1003						//"Encoder error (disconnected or other errors)"
+#define	CON_FLT_WATCH_DOG												1004						//"FPGA watchdog not received"
+#define	CON_FLT_DEAD_TIME												1005						//"PWM dead time too short"
+#define	CON_FLT_HALLS_DISCONNECTED										1006						//"Hall input disconnected"
+#define	CON_FLT_MOTOR_STUCK												1007						//"Motor is stuck"
+#define	CON_FLT_BUS_OVER_VOLTAGE										1008						//"Bus Voltage too high"
+#define	CON_FLT_BUS_UNDER_VOLTAGE										1009						//"Bus Voltage too low"
+#define	CON_FLT_LOGIC_OVER_VOLTAGE										1010						//"Logic Voltage too high"
+#define	CON_FLT_LOGIC_UNDER_VOLTAGE										1011						//"Logic Voltage too low"
+#define	CON_FLT_HIGH_BUS_CURRENT										1012						//"Bus current too high"
+#define	CON_FLT_PHASE_A_CURRENT											1013						//"Phase A current too high"
+#define	CON_FLT_PHASE_B_CURRENT											1014						//"Phase B current too high"
+#define	CON_FLT_PHASE_C_CURRENT											1015						//"Phase C current too high"
+#define	CON_FLT_MOTOR_CURRENT											1016						//"Motor current too high"
+#define	CON_FLT_OVER_DRIVER_POWER										1017						//"Driver power exceeds limit"
+#define	CON_FLT_HIGH_IPM_TEMP											1018						//"IPM temperature too high"
+#define	CON_FLT_HIGH_VELOCITY											1019						//"Velocity too high"
+#define	CON_FLT_HIGH_POS_ERR											1020						//"Position error exceeds limit"
+#define	CON_FLT_HIGH_VEL_ERR											1021						//"Velocity error exceeds limit"
+#define	CON_FLT_HIGH_CPU_TEMP											1022						//"CPU temperature too high"
+#define	CON_FLT_BUS_OVER_VOLTAGE_ABS									1023						//"Bus Voltage too high - exceed absolute limitation"
+#define	CON_FLT_STO1													1024						//"STO1 activated"
+#define	CON_FLT_OVERCURR_A												1025						//"Over current detected on motor A"
+#define	CON_FLT_AUX_ENC_ERROR											1026						//"Auxiliary encoder error (disconnected or other errors)"
+#define	CON_FLT_IPM_FAULT												1027						//"IPM fault"
+#define	CON_FLT_UNKNOWN_ENCODER_TYPE									1028						//"The selected encoder type is currently not supported"
+#define	CON_FLT_UNKNOWN_AUX_ENCODER_TYPE								1029						//"The selected auxiliary encoder type is currently not supported"
+#define	CON_FLT_ECAM_MASTER_TOO_FAST									1030						//"The ECAM master variables changed more than 1 ECAM cycle in 1 sample"
+#define	CON_FLT_FIFO_TOO_SMALL_ACCLERATION								1031						//"The FIFO reached a motion segment which results with a too small acceleration: below 1/Ts"
+#define	CON_FLT_IMPROPER_MODULUS_USAGE									1032						//"The main encoder modulus can't be used with input shaping feature"
+#define	CON_FLT_BIT_FAILED												1033						//"Some fault was detected during power on BIT. Use BITFault to read its code"
+#define	CON_FLT_STO2_OR_VCC_DRIVE										1034						//"STO2 activated or problem with Vcc of amplifier"
+#define	CON_FLT_CONTROL_AC_POWER_CUTOFF									1035						//"AC Power supply to the control was cut off"
+#define	CON_FLT_OVERCURR_B												1036						//"Over current detected on motor B"
+#define	CON_FLT_LINEAR_AMPLIFIER_OVER_CURR_CONT							1037						//"Over continuous current detected on built-in Linear Amplifier"
+#define	CON_FLT_LINEAR_AMPLIFIER_OVER_VOLTAGE							1038						//"Over voltage detected by the built-in Linear Amplifier"
+#define	CON_FLT_LINEAR_PWM_AMPLIFIER_CONFLICT							1039						//"AAmpType and BAmpType have conflicting values. Can not be one Linear and one PWM"
+#define	CON_FLT_HIGH_MOTOR_TEMP											1040						//"Motor temperature too high"
+#define	CON_FLT_RESERVED1												1041						//"Unexpected error code, consult Agito"
+#define	CON_FLT_5V_ISO													1042						//"Amplifier isolated 5v fault"
+#define CON_FLT_CI_DISCONNECTED											1043						//"CI Communication was disconnected"
+#define CON_FLT_MOTOR_I2T                                               1044                        //"Motor current over I2T"
+#define CON_FLT_HIGH_FORCE_ERR                                          1045                        //"Force error exceeds limit"
+#define CON_FLT_NO_FORCE_FEEDBACK										1046						//"Force control: analog force feedback not defined"
+#define CON_FLT_5V_FAULT												1047						//"One of the 5v output pins for encoders or I/O activated the current limitation. Check your HW connections!"
+#define CON_FLT_MEMBER_UNEXPECTED_MOTOR_OFF								1048						//"Other member axis got motor off"
+#define	CON_FLT_DUAL_STUCK												1049						//"Dual Loop high difference between velocities"
+#define	CON_FLT_FAULT_INPUT												1050						//"External fault input (for example: of external drive) is activated"
+#define	CON_FLT_INRUSH_RESISTOR											1051						//"Internal relay is still switched off. Try waiting more time after power on before enabling the motor"
+#define	CON_FLT_STO2													1052						//"STO2 activated"
+#define	CON_FLT_AMP_TYPE_ERROR											1053						//"AmpType value not allowed for this product"
+#define	CON_FLT_MOTOR_AC_POWER_CUTOFF									1054						//"At least one required phase of the AC Power inputs was cut off"
+#define CON_FLT_HIGH_POS_ERR_OL                                         1055                        //"Position error exceeds limit in open-loop"
+#define CON_FLT_HIGH_VEL_ERR_OL                                         1056                        //"Velocity error exceeds limit in open-loop"
+#define CON_FLT_HIGH_FORCE_ERR_OL                                       1057                        //"Force error exceeds limit in open-loop"
+#define CON_FLT_UNDERVOLTAGE                                            1058                        //"Undervoltage detected on 10.5v supply (8v threshold)"
+#define CON_FLT_OVERCURR_C                                              1059                        //"Over current detected on motor C"
+#define	CON_FLT_HIGH_BOARD_TEMP											1060						//"Product temperature (BoardTemp) too high"
+#define CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF						1061						//"Other gantry member axis got motor off"
+#define	CON_FLT_FAULT_INPUT_CONTROLLED_STOP								1062						//"External request to Fault with Controlled Stop: stop ended and motor was disabled"
+#define CON_FLT_VEC_MEMBER_UNEXPECTED_MOTOR_OFF							1063						//"Other member axis got motor off"
+#define CON_FLT_ICNQC_ERROR												1064						//"There is an error in the encoder sine/cosine reading."
+#define CON_FLT_STALL_DETECTED_AND_MOTOR_OFF							1065						//"Stall detection activated, motor is turning off"
+#define CON_FLT_VENC_MAX_NUM_PULSES_EXCEEDED                            1066                        //"Virtual encoder has exceeded the max number of possible pulses per interrupt"
+#define CON_FLT_ANOMALY_DETECTED										1067                        //"Anomaly/collision detected in the system"
+#define CON_FLT_ABS_ENC_ERROR                                           1068                        //"Abs Encoder Error bit is asserted, either the assembly encoder readhead is not good, or the encoder scale needs to be inspected"
+#define CON_FLT_ABS_ENC_CRC_ERR                                         1069                        //"Abs Encoder CRC has failed beyond a time threshold set by EncAbsErrTime. The noise level might be too high"
+#define CON_FLT_ABS_ENC_DISCONNECT                                      1070                        //"Abs Encoder could not be detected and looks like is disconnected"
+#define CON_FLT_UNSTABLE_CURR_LOOP_DETECTED                             1071                        //"Unstable current loop detected"
+#define CON_FLT_HIGH_PIV_NOISE_DETECTED                                 1072                        //"High noise/jitter detected"
+#define CON_FLT_NO_PHASING_IS_DETECTED									1080						//"No phasing is detected"
+#define CON_FLT_CPU_BG_WATCHDOG											1081						//"CPU background loop watchdog timeout"
+
