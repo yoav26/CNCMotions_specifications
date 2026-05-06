@@ -1,5 +1,5 @@
 // 
-// uphGeneralConstant.puh2
+// uphGeneralConstants.puh2
 // -------------------------------------
 // 
 // General Header file. Includes general constants; included automatically when using UPL modules
@@ -172,8 +172,8 @@
 
 
 // Controller Fault (ConFlt) definitions and bits
-//remvoe-#define	CON_FLT_NONE													0							//"No fault has occurred"
-//remvoe-#define CON_FLT_BASE                                                    1000                        //Base from which ConFlt is incremented
+//remove-#define	CON_FLT_NONE													0							//"No fault has occurred"
+//remove-#define CON_FLT_BASE                                                    1000                        //Base from which ConFlt is incremented
 #define	CON_FLT_ABORT													1001						//"Abort signal was detected"
 #define	CON_FLT_SHORT													1002						//"Short from motor phase to ground"
 #define	CON_FLT_ENCODER_ERROR											1003						//"Encoder error (disconnected or other errors)"

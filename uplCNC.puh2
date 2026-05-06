@@ -1,5 +1,5 @@
 // 
-// uphCNC.puh2
+// uplCNC.puh2
 // -------------------------------------
 // 
 // Motion Functions file. Includes the Motions functions:
@@ -36,7 +36,7 @@
 #define FIVEINV_UNUSED_MASK		0x0000000F
 
 
-// Araay types:
+// Array types:
 #define ARRAY_TYPE_GENDATA      0
 #define ARRAY_TYPE_USERPARAM    1
 
