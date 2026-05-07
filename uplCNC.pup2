@@ -10,20 +10,20 @@
 
 
 #include uphGeneralConstants.puh2
-#include uplMotions.puh2
+#include uplMotion.puh2
 #include uplCNC.puh2
 
 
 // --- Type 1: Linear — 1 involved axis
 // Params: TargetPos1, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ : reference to the 1st (and only) axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ : reference to the 1st (and only) axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ : Absolute target position of the 1st axis [user-units]
 // -- Speed 	: Cruising Speed [user-units / sec]
 // -- EndSpeed 	: End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear1(l:AxisRef1_, AbsTrgt:TrgtPos1_, Speed:Speed_, Speed:EndSpeed_)
+function: uplMotionCNCLinear1(l:lAxis1_, AbsTrgt:TrgtPos1_, Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ONEINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ONEINV_UNUSED_MASK
 
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, Speed_
@@ -35,13 +35,13 @@ endoffunc
 // --- Type 1: Linear — 2 involved axes
 // Params: TargetPos1, TargetPos2, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ /2_ : reference to the 1st/2nd axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ /2_ : reference to the 1st/2nd axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ /2_ : Absolute target position of the 1st/2nd axis [user-units]
 // -- Speed 	: Cruising Speed [user-units / sec]
 // -- EndSpeed 	: End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear2(l:AxisRef1_, AbsTrgt:TrgtPos1_, l:AxisRef2_,  AbsTrgt:TrgtPos2_, Speed:Speed_, Speed:EndSpeed_)
+function: uplMotionCNCLinear2(l:lAxis1_, AbsTrgt:TrgtPos1_, l:lAxis2_,  AbsTrgt:TrgtPos2_, Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
 	
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -54,16 +54,16 @@ endoffunc
 // --- Type 1: Linear — 3 involved axes
 // Params: TargetPos1, TargetPos2, TargetPos3, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ /2_/3_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ /2_/3_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ /2_/3_ : Absolute target position of the 1st/2nd/etc' axis [user-units]
 // -- Speed 		   : Cruising Speed [user-units / sec]
 // -- EndSpeed 		   : End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear3(l:AxisRef1_, AbsTrgt:TrgtPos1_,
-								l:AxisRef2_, AbsTrgt:TrgtPos2_,
-								l:AxisRef3_, AbsTrgt:TrgtPos3_,
+function: uplMotionCNCLinear3(l:lAxis1_, AbsTrgt:TrgtPos1_,
+								l:lAxis2_, AbsTrgt:TrgtPos2_,
+								l:lAxis3_, AbsTrgt:TrgtPos3_,
 								Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | ((AxisRef3_ & 0xF) << 12) | THREEINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | ((lAxis3_ & 0xF) << 12) | THREEINV_UNUSED_MASK
 
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -77,17 +77,17 @@ endoffunc
 // --- Type 1: Linear — 4 involved axes
 // Params: TargetPos1..4, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ /2_/3_/4_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ /2_/3_/4_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ /2_/3_/4_ : Absolute target position of the 1st/2nd/etc' axis [user-units]
 // -- Speed 		   	  : Cruising Speed [user-units / sec]
 // -- EndSpeed 		      : End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear4(l:AxisRef1_, AbsTrgt:TrgtPos1_,
-								l:AxisRef2_, AbsTrgt:TrgtPos2_,
-								l:AxisRef3_, AbsTrgt:TrgtPos3_,
-								l:AxisRef4_, AbsTrgt:TrgtPos4_,
+function: uplMotionCNCLinear4(l:lAxis1_, AbsTrgt:TrgtPos1_,
+								l:lAxis2_, AbsTrgt:TrgtPos2_,
+								l:lAxis3_, AbsTrgt:TrgtPos3_,
+								l:lAxis4_, AbsTrgt:TrgtPos4_,
 								Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | ((AxisRef3_ & 0xF) << 12) | ((AxisRef4_ & 0xF) << 8) | FOURINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | ((lAxis3_ & 0xF) << 12) | ((lAxis4_ & 0xF) << 8) | FOURINV_UNUSED_MASK
 	
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -102,18 +102,18 @@ endoffunc
 // --- Type 1: Linear — 5 involved axes
 // Params: TargetPos1..5, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ /2_/3_/4_/5_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ /2_/3_/4_/5_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ /2_/3_/4_/5_ : Absolute target position of the 1st/2nd/etc' axis [user-units]
 // -- Speed 		   	     : Cruising Speed [user-units / sec]
 // -- EndSpeed 		         : End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear5(l:AxisRef1_, AbsTrgt:TrgtPos1_,
-								l:AxisRef2_, AbsTrgt:TrgtPos2_,
-								l:AxisRef3_, AbsTrgt:TrgtPos3_,
-								l:AxisRef4_, AbsTrgt:TrgtPos4_,
-								l:AxisRef5_, AbsTrgt:TrgtPos5_,
+function: uplMotionCNCLinear5(l:lAxis1_, AbsTrgt:TrgtPos1_,
+								l:lAxis2_, AbsTrgt:TrgtPos2_,
+								l:lAxis3_, AbsTrgt:TrgtPos3_,
+								l:lAxis4_, AbsTrgt:TrgtPos4_,
+								l:lAxis5_, AbsTrgt:TrgtPos5_,
 								Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | ((AxisRef3_ & 0xF) << 12) | ((AxisRef4_ & 0xF) << 8) | ((AxisRef5_ & 0xF) << 4) | FIVEINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | ((lAxis3_ & 0xF) << 12) | ((lAxis4_ & 0xF) << 8) | ((lAxis5_ & 0xF) << 4) | FIVEINV_UNUSED_MASK
 	
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -129,19 +129,19 @@ endoffunc
 // --- Type 1: Linear — 6 involved axes
 // Params: TargetPos1..6, Speed, End Speed
 // Func. args:
-// -- AxisRef1_ /2_/3_/4_/5_/6_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ /2_/3_/4_/5_/6_ : reference to the 1st/2nd/etc' axis [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ /2_/3_/4_/5_/6_ : Absolute target position of the 1st/2nd/etc' axis [user-units]
 // -- Speed 		   	        : Cruising Speed [user-units / sec]
 // -- EndSpeed 		            : End of segment Speed [user-units / sec]
-function: uplMotionCNCLinear6(l:AxisRef1_, AbsTrgt:TrgtPos1_,
-								l:AxisRef2_, AbsTrgt:TrgtPos2_,
-								l:AxisRef3_, AbsTrgt:TrgtPos3_,
-								l:AxisRef4_, AbsTrgt:TrgtPos4_,
-								l:AxisRef5_, AbsTrgt:TrgtPos5_,
-								l:AxisRef6_, AbsTrgt:TrgtPos6_,
+function: uplMotionCNCLinear6(l:lAxis1_, AbsTrgt:TrgtPos1_,
+								l:lAxis2_, AbsTrgt:TrgtPos2_,
+								l:lAxis3_, AbsTrgt:TrgtPos3_,
+								l:lAxis4_, AbsTrgt:TrgtPos4_,
+								l:lAxis5_, AbsTrgt:TrgtPos5_,
+								l:lAxis6_, AbsTrgt:TrgtPos6_,
 								Speed:Speed_, Speed:EndSpeed_)
 	
-	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | ((AxisRef3_ & 0xF) << 12) | ((AxisRef4_ & 0xF) << 8) | ((AxisRef5_ & 0xF) << 4) | (AxisRef6_ & 0xF)
+	ACNCAPushType, (CNC_SEGMENT_TYPE_LINEAR << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | ((lAxis3_ & 0xF) << 12) | ((lAxis4_ & 0xF) << 8) | ((lAxis5_ & 0xF) << 4) | (lAxis6_ & 0xF)
 
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -160,18 +160,18 @@ endoffunc
 // Number of involved axes: 2 (defines the plane of the arc)
 // Params: TrgtPos1, TrgtPos2, CenterPos1, CenterPos2, Dir, cruise_speed, end_speed, AdditionalCycles (0), Dummy1, Dummy2
 // Func. args:
-// -- AxisRef1_ / AxisRef2_   : reference to the 1st / 2nd axis in the arc plane [A_AXIS, B_AXIS, ..]
+// -- lAxis1_ / lAxis2_   : reference to the 1st / 2nd axis in the arc plane [A_AXIS, B_AXIS, ..]
 // -- TrgtPos1_ / TrgtPos2_    : absolute end position on axis 1 / 2 [user-units]
 // -- CenterPos1 / CenterPos2 : absolute arc center on axis 1 / 2 [user-units]
 // -- Dir                     : arc direction (CW/CCW encoding per controller)
 // -- cruise_speed            : cruise speed along the path [user-units / sec]
 // -- end_speed               : end-of-segment speed [user-units / sec]
-function: uplCNCARrcMotion(l:AxisRef1_, l:AxisRef2_,
+function: uplCNCARrcMotion(l:lAxis1_, l:lAxis2_,
 							AbsTrgt:TrgtPos1_, AbsTrgt:TrgtPos2_,
 							AbsTrgt:CenterPos1, AbsTrgt:CenterPos2, ll:Dir,
 							Speed:cruise_speed, Speed:end_speed)
 
-	ACNCAPushType, (CNC_SEGMENT_TYPE_ARC << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_ARC << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
 	
 	ACNCAPushParam, TrgtPos1_
 	ACNCAPushParam, TrgtPos2_
@@ -239,16 +239,16 @@ endoffunc
 
 // Type 8 - DOUT Port Write segment
 // Segment type value: 8
-// Number of involved axes: 0 (AxisRef_ is pushed as a parameter, not encoded in CNCAPushType)
-// Params: AxisRef_, DOutPortValue_
+// Number of involved axes: 0 (lAxis_ is pushed as a parameter, not encoded in CNCAPushType)
+// Params: lAxis_, DOutPortValue_
 // Func. args:
-// -- AxisRef_       : axis reference passed as a push parameter [A_AXIS, B_AXIS, ..]
+// -- lAxis_       : axis reference passed as a push parameter [A_AXIS, B_AXIS, ..]
 // -- DOutPortValue_ : digital output port value to write
-function: uplCNCDOutPortWrite(l:AxisRef_, l:DOutPortValue_)
+function: uplCNCDOutPortWrite(l:lAxis_, l:DOutPortValue_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_DOUTPORT_WRITE << 24) | NONINV_UNUSED_MASK
 
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, DOutPortValue_
 
 endoffunc
@@ -256,24 +256,24 @@ endoffunc
 
 // Type 9 - Array Write segment
 // Segment type value: 9
-// Number of involved axes: 0 (AxisRef_ is pushed as a parameter, not encoded in CNCAPushType)
-// Func. arg order (user-facing): AxisRef_, ArrayType_, Index_, Value_
-// Pushed params order (controller-facing): ArrayType_, AxisRef_, Index_, Value_
+// Number of involved axes: 0 (lAxis_ is pushed as a parameter, not encoded in CNCAPushType)
+// Func. arg order (user-facing): lAxis_, ArrayType_, Index_, Value_
+// Pushed params order (controller-facing): ArrayType_, lAxis_, Index_, Value_
 // Func. args:
-// -- AxisRef_   : axis reference passed as a push parameter; used for UserParam selection
+// -- lAxis_   : axis reference passed as a push parameter; used for UserParam selection
 // -- ArrayType_ : array selection (0 = ARRAY_TYPE_GENDATA, 1 = ARRAY_TYPE_USERPARAM).
 //                 Supported systems will use GenDataLL[] and UserParamLL[].
 // -- Index_     : target array index
 // -- Value_     : value to write
 // CNC engine behavior when this segment is reached:
 //   * If ArrayType_ = 0: GenData[Index_] = Value_
-//   * If ArrayType_ = 1: <AxisRef_>UserParam[Index_] = Value_
-function: uplCNCArrayWrite(l:AxisRef_, l:ArrayType_, l:Index_, CNCAPushParam:Value_)
+//   * If ArrayType_ = 1: <lAxis_>UserParam[Index_] = Value_
+function: uplCNCArrayWrite(l:lAxis_, l:ArrayType_, l:Index_, CNCAPushParam:Value_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_ARRAY_WRITE << 24) | NONINV_UNUSED_MASK
 
 	ACNCAPushParam, ArrayType_
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, Index_
 	ACNCAPushParam, Value_
 
@@ -285,24 +285,24 @@ endoffunc
 // Number of involved axes: 0 (exactly)
 // Params: ArraySelection, AxisIdentification, IndexValue, TriggerType, TriggerValue
 // Func. args:
-// -- AxisRef_     : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
+// -- lAxis_     : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
 // -- ArrayType_   : array selection (0 = GenData[], 1 = UserParam[])
 // -- Index_       : target array index value
 // -- TriggerType_ : 0=None, 1=GreaterThan, 2=EqualTo, 3=NotEqualTo, 4=SmallerThan,
 //                   5=RisingEdge, 6=FallingEdge, 7=Reserved(acts as 0), 8=UponChange
 // -- TriggerValue_: trigger value; ignored for TriggerType_ = 8 but must still be pushed
-// Note: function argument order is AxisRef-first for user convenience; pushed parameter order is
-//       controller-defined and kept as ArrayType, AxisRef, Index, TriggerType, TriggerValue.
+// Note: function argument order is lAxis-first for user convenience; pushed parameter order is
+//       controller-defined and kept as ArrayType, lAxis, Index, TriggerType, TriggerValue.
 // CNC engine behavior when this segment is reached:
 //   * Waits in-position of all member axes until the trigger condition is satisfied.
 //   * The segment halts CNC segment execution for at least 1 sample time, even if TriggerType_ = 0
 //     or the trigger condition is already satisfied immediately.
-function: uplCNCWaitUsingUserArray(l:AxisRef_, l:ArrayType_, l:Index_, l:TriggerType_, CNCAPushParam:TriggerValue_)
+function: uplCNCWaitUsingUserArray(l:lAxis_, l:ArrayType_, l:Index_, l:TriggerType_, CNCAPushParam:TriggerValue_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_WAIT_ARRAY << 24) | NONINV_UNUSED_MASK
 
 	ACNCAPushParam, ArrayType_
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, Index_
 	ACNCAPushParam, TriggerType_
 	ACNCAPushParam, TriggerValue_
@@ -319,10 +319,10 @@ endoffunc
 //   * The last motion segment is Linear Motion
 //   * The involved axes are identical to the involved axes of the previous motion segment
 // Func. args:
-// -- AxisRef1_ / AxisRef2_ : reference to the 1st / 2nd involved axes [A_AXIS, B_AXIS, ..]
-function: uplCNCAutomaticCornerMotion(l:AxisRef1_, l:AxisRef2_)
+// -- lAxis1_ / lAxis2_ : reference to the 1st / 2nd involved axes [A_AXIS, B_AXIS, ..]
+function: uplCNCAutomaticCornerMotion(l:lAxis1_, l:lAxis2_)
 
-	ACNCAPushType, (CNC_SEGMENT_TYPE_AUTOMATIC_CORNER << 24) | ((AxisRef1_ & 0xF) << 20) | ((AxisRef2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
+	ACNCAPushType, (CNC_SEGMENT_TYPE_AUTOMATIC_CORNER << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
 	
 	ACNCAPushParam, CNCAPushParam:0 // Dummy1 // TODO change all types to be dynamic. 
 	ACNCAPushParam, ll:0	// Dummy2
@@ -343,12 +343,12 @@ endoffunc
 // Number of involved axes: 0 (exactly)
 // Params: ArraySelection, AxisIdentification, IndexValue, Value1, Value2, Value3, Value4
 // Func. args:
-// -- AxisRef_   : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
+// -- lAxis_   : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
 // -- ArrayType_ : array selection (0 = GenData[], 1 = UserParam[])
 // -- Index_     : target array index value
 // -- Value1_..Value4_ : values to write to 4 consecutive array entries
-// Note: function argument order is AxisRef-first for user convenience; pushed parameter order is
-//       controller-defined and kept as ArrayType, AxisRef, Index, Value1, Value2, Value3, Value4.
+// Note: function argument order is lAxis-first for user convenience; pushed parameter order is
+//       controller-defined and kept as ArrayType, lAxis, Index, Value1, Value2, Value3, Value4.
 // CNC engine behavior when this segment is reached:
 //   * If ArrayType_ = 0:
 //       GenData[Index_]   = Value1_
@@ -356,16 +356,16 @@ endoffunc
 //       GenData[Index_+2] = Value3_
 //       GenData[Index_+3] = Value4_
 //   * If ArrayType_ = 1:
-//       <AxisRef_>UserParam[Index_]   = Value1_
-//       <AxisRef_>UserParam[Index_+1] = Value2_
-//       <AxisRef_>UserParam[Index_+2] = Value3_
-//       <AxisRef_>UserParam[Index_+3] = Value4_
-function: uplCNCArrayWriteMultiple(l:AxisRef_, l:ArrayType_, l:Index_, CNCAPushParam:Value1_, CNCAPushParam:Value2_, CNCAPushParam:Value3_, CNCAPushParam:Value4_)
+//       <lAxis_>UserParam[Index_]   = Value1_
+//       <lAxis_>UserParam[Index_+1] = Value2_
+//       <lAxis_>UserParam[Index_+2] = Value3_
+//       <lAxis_>UserParam[Index_+3] = Value4_
+function: uplCNCArrayWriteMultiple(l:lAxis_, l:ArrayType_, l:Index_, CNCAPushParam:Value1_, CNCAPushParam:Value2_, CNCAPushParam:Value3_, CNCAPushParam:Value4_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_ARRAY_WRITE_MULTIPLE << 24) | NONINV_UNUSED_MASK
 
 	ACNCAPushParam, ArrayType_
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, Index_
 	ACNCAPushParam, Value1_
 	ACNCAPushParam, Value2_
@@ -381,7 +381,7 @@ endoffunc
 // Params: ArraySelection, AxisIdentification, IndexValue, Value1, Value2, Value3, Value4,
 //         TriggerIndexValue, TriggerType, TriggerValue
 // Func. args:
-// -- AxisRef_       : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
+// -- lAxis_       : axis identification used for UserParam[] only (0 = A axis, 1 = B axis, and so on)
 // -- ArrayType_     : array selection (0 = GenData[], 1 = UserParam[])
 // -- Index_         : starting array index value for the 4 write operations
 // -- Value1_..Value4_: values to write to 4 consecutive array entries
@@ -389,8 +389,8 @@ endoffunc
 // -- TriggerType_   : 0=None, 1=GreaterThan, 2=EqualTo, 3=NotEqualTo, 4=SmallerThan,
 //                     5=RisingEdge, 6=FallingEdge, 7=Reserved(acts as 0), 8=UponChange
 // -- TriggerValue_  : trigger value; ignored for TriggerType_ = 8 but must still be pushed
-// Note: function argument order is AxisRef-first for user convenience; pushed parameter order is
-//       controller-defined and kept as ArrayType, AxisRef, Index, Value1..4, TriggerIndex, TriggerType, TriggerValue.
+// Note: function argument order is lAxis-first for user convenience; pushed parameter order is
+//       controller-defined and kept as ArrayType, lAxis, Index, Value1..4, TriggerIndex, TriggerType, TriggerValue.
 // CNC engine behavior when this segment is reached:
 //   1) Performs the same 4 assignments as Type 17:
 //      - If ArrayType_ = 0:
@@ -399,15 +399,15 @@ endoffunc
 //          GenData[Index_+2] = Value3_
 //          GenData[Index_+3] = Value4_
 //      - If ArrayType_ = 1:
-//          <AxisRef_>UserParam[Index_]   = Value1_
-//          <AxisRef_>UserParam[Index_+1] = Value2_
-//          <AxisRef_>UserParam[Index_+2] = Value3_
-//          <AxisRef_>UserParam[Index_+3] = Value4_
+//          <lAxis_>UserParam[Index_]   = Value1_
+//          <lAxis_>UserParam[Index_+1] = Value2_
+//          <lAxis_>UserParam[Index_+2] = Value3_
+//          <lAxis_>UserParam[Index_+3] = Value4_
 //   2) Then waits in-position of all member axes according to trigger definitions,
 //      using the same selected array with TriggerIndex_.
 //   3) This segment halts CNC segment execution for at least 1 sample time,
 //      even if TriggerType_ = 0 or trigger condition is already satisfied immediately.
-function: uplCNCArrayWriteMultipleWait(l:AxisRef_, l:ArrayType_, l:Index_,
+function: uplCNCArrayWriteMultipleWait(l:lAxis_, l:ArrayType_, l:Index_,
 									   CNCAPushParam:Value1_, CNCAPushParam:Value2_,
 									   CNCAPushParam:Value3_, CNCAPushParam:Value4_,
 									   l:TriggerIndex_, l:TriggerType_, CNCAPushParam:TriggerValue_)
@@ -415,7 +415,7 @@ function: uplCNCArrayWriteMultipleWait(l:AxisRef_, l:ArrayType_, l:Index_,
 	ACNCAPushType, (CNC_SEGMENT_TYPE_ARRAY_WRITE_MULTIPLE_WAIT << 24) | NONINV_UNUSED_MASK
 
 	ACNCAPushParam, ArrayType_
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, Index_
 	ACNCAPushParam, Value1_
 	ACNCAPushParam, Value2_
@@ -434,7 +434,7 @@ endoffunc
 // Params: InputSelection, AxisIdentification, IndexValue, DInputsMask, TriggerType, TriggerValue
 // Func. args:
 // -- InputSelection_ : input selection (0 = DInPort, 1 = AInPort)
-// -- AxisRef_        : axis identification (0 = A axis, 1 = B axis, and so on)
+// -- lAxis_        : axis identification (0 = A axis, 1 = B axis, and so on)
 // -- Index_          : AInPort index value (used for AInPort only, must be > 0)
 // -- DInputsMask_    : bit-mask for DInPort trigger check (used for DInPort only, default -1)
 // -- TriggerType_    : 0=None, 1=GreaterThan, 2=EqualTo, 3=NotEqualTo, 4=SmallerThan,
@@ -446,12 +446,12 @@ endoffunc
 //   * For InputSelection_ = 1, trigger is evaluated on AInPort[Index_].
 //   * This segment halts CNC segment execution for at least 1 sample time,
 //     even if TriggerType_ = 0 or trigger condition is already satisfied immediately.
-function: uplCNCWaitInput(l:AxisRef_, l:InputSelection_, l:Index_, ll:DInputsMask_, l:TriggerType_, CNCAPushParam:TriggerValue_)
+function: uplCNCWaitInput(l:lAxis_, l:InputSelection_, l:Index_, ll:DInputsMask_, l:TriggerType_, CNCAPushParam:TriggerValue_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_WAIT_INPUT << 24) | NONINV_UNUSED_MASK
 
 	ACNCAPushParam, InputSelection_
-	ACNCAPushParam, AxisRef_
+	ACNCAPushParam, lAxis_
 	ACNCAPushParam, Index_
 	ACNCAPushParam, DInputsMask_
 	ACNCAPushParam, TriggerType_

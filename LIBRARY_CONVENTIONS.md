@@ -23,8 +23,8 @@ This document is the single source of truth for conventions used in this library
   - Utility: `upl...` (utility scope)
   - CNC: `uplCNC...`
 - **Constants/macros** use `UPPER_SNAKE_CASE`.
-- **Function parameters** use trailing underscore (`_`), e.g. `AxisRef_`, `ArrayType_`, `TriggerValue_`.
-- **Axis arguments** should use `AxisRef_` naming in CNC APIs and `lAxis_` naming in Motion/Utility APIs unless a function already has an established public signature.
+- **Function parameters** use trailing underscore (`_`), e.g. `lAxis_`, `ArrayType_`, `TriggerValue_`.
+- **Axis arguments** should use `lAxis_` naming consistently across CNC/Motion/Utility APIs unless a function already has an established public signature.
 
 ## 2) Function Signature Conventions
 
@@ -35,8 +35,8 @@ This document is the single source of truth for conventions used in this library
 
 ## 3) Axis-First API Rule (CNC user-facing APIs)
 
-- For user convenience, CNC APIs that include axis identification should place `AxisRef_` first in function arguments when practical and backward-compatible.
-- Example (user-facing): `uplCNCWaitUsingUserArray(AxisRef_, ArrayType_, Index_, TriggerType_, TriggerValue_)`
+- For user convenience, CNC APIs that include axis identification should place `lAxis_` first in function arguments when practical and backward-compatible.
+- Example (user-facing): `uplCNCWaitUsingUserArray(lAxis_, ArrayType_, Index_, TriggerType_, TriggerValue_)`
 
 ## 4) Push-Order Semantics (Controller-facing)
 
@@ -75,7 +75,7 @@ Example:
 - Use consistent wording and spelling:
   - `reference`, `absolute`, `position`, `millisecond`, `constants`, `array`
 - Units must be explicit where applicable (`[user-units / sec]`, etc.).
-- Use `AxisRef_`, `ArrayType_`, `TriggerType_`, etc. consistently in docs/comments.
+- Use `lAxis_`, `ArrayType_`, `TriggerType_`, etc. consistently in docs/comments.
 
 ## 7) Constants Ownership (Canonical Source)
 

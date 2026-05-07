@@ -1,5 +1,5 @@
 // 
-// uplMotions.pup2
+// uplMotion.pup2
 // -------------------------------------
 // 
 // Motion Functions file. Includes the Motions functions:
@@ -26,7 +26,7 @@
 
 
 #include uphGeneralConstants.puh2
-#include uplMotions.puh2
+#include uplMotion.puh2
 #include uplUtility.puh2
 
 

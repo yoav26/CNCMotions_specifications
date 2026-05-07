@@ -4,8 +4,8 @@
 	<Files>
 		<File>CNCMotions_specifications.pup2</File>
 		<File>CNCMotions_specifications.puh2</File>
-		<File>uplMotions.pup2</File>
-		<File>uplMotions.puh2</File>
+		<File>uplMotion.pup2</File>
+		<File>uplMotion.puh2</File>
 		<File>uplUtility.pup2</File>
 		<File>uplUtility.puh2</File>
 		<File>uphGeneralConstants.puh2</File>
@@ -20,7 +20,7 @@
 		<WatchWindow>
 		</WatchWindow>
 	</WatchRegion>
-	<OpenFiles>CNCMotions_specifications.pup2;uplCNC.pup2;uplCNC.puh2;uplMotions.pup2;CNCMotions_specifications.puh2;uphGeneralConstants.puh2;uplMotions.puh2</OpenFiles>
+	<OpenFiles>CNCMotions_specifications.pup2;uplCNC.pup2;uplCNC.puh2;CNCMotions_specifications.puh2;uphGeneralConstants.puh2;uplUtility.pup2;uplUtility.puh2</OpenFiles>
 	<ActiveFile>CNCMotions_specifications.pup2</ActiveFile>
 	<TextZoom>0</TextZoom>
 	<AutocompleteEnabled>True</AutocompleteEnabled>

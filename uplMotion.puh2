@@ -1,5 +1,5 @@
 // 
-// uplMotions.puh2
+// uplMotion.puh2
 // -------------------------------------
 // 
 // Motion Header file. Includes motion related constants.
@@ -33,5 +33,4 @@
 
 // Values
 #define MOTION_END		0
-
 

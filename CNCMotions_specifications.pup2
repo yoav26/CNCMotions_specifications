@@ -9,7 +9,7 @@
 #include CNCMotions_specifications.puh2
 #include uplCNC.puh2
 #include uphGeneralConstants.puh2
-#include uplMotions.puh2
+#include uplMotion.puh2
 #include uplUtility.puh2
 // 
 #information   Replace this with information about your program
@@ -83,20 +83,20 @@ main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
 // uplCNCDOutPortWrite(A_AXIS, DOutPortValue=1)
 	uplCNCDOutPortWrite(A_AXIS, 1)
 
-// uplCNCArrayWrite(AxisRef=A_AXIS, ArrayType=0=ARRAY_TYPE_GENDATA, Index=10, Value=111)
+// uplCNCArrayWrite(lAxis=A_AXIS, ArrayType=0=ARRAY_TYPE_GENDATA, Index=10, Value=111)
 	uplCNCArrayWrite(A_AXIS, ARRAY_TYPE_GENDATA, 10, CNCAPushParam:111)
 
-// uplCNCWaitUsingUserArray(AxisRef=A_AXIS, ArrayType=0=GenData[], Index=10, TriggerType=2=EqualTo, TriggerValue=111)
-// Note: function arg order is AxisRef-first for convenience; pushed parameter order is controller-defined.
+// uplCNCWaitUsingUserArray(lAxis=A_AXIS, ArrayType=0=GenData[], Index=10, TriggerType=2=EqualTo, TriggerValue=111)
+// Note: function arg order is lAxis-first for convenience; pushed parameter order is controller-defined.
 	uplCNCWaitUsingUserArray(A_AXIS, 0, 10, 2, CNCAPushParam:111)
 
-// uplCNCArrayWriteMultiple(AxisRef=A_AXIS, ArrayType=0=GenData[], Index=20, Value1..4=1,2,3,4)
+// uplCNCArrayWriteMultiple(lAxis=A_AXIS, ArrayType=0=GenData[], Index=20, Value1..4=1,2,3,4)
 	uplCNCArrayWriteMultiple(A_AXIS, ARRAY_TYPE_GENDATA, 20, CNCAPushParam:1, CNCAPushParam:2, CNCAPushParam:3, CNCAPushParam:4)
 
-// uplCNCArrayWriteMultipleWait(AxisRef=A_AXIS, ArrayType=0=GenData[], Index=30, Value1..4=10,20,30,40, TriggerIndex=30, TriggerType=1=CNC_TRIG_GT, TriggerValue=0)
+// uplCNCArrayWriteMultipleWait(lAxis=A_AXIS, ArrayType=0=GenData[], Index=30, Value1..4=10,20,30,40, TriggerIndex=30, TriggerType=1=CNC_TRIG_GT, TriggerValue=0)
 	uplCNCArrayWriteMultipleWait(A_AXIS, ARRAY_TYPE_GENDATA, 30, CNCAPushParam:10, CNCAPushParam:20, CNCAPushParam:30, CNCAPushParam:40, 30, CNC_TRIG_GT, CNCAPushParam:0)
 
-// uplCNCWaitInput(AxisRef=A_AXIS, InputSelection=0=DInPort, Index=1, DInputsMask=-1, TriggerType=0=CNC_TRIG_NONE, TriggerValue=0)
+// uplCNCWaitInput(lAxis=A_AXIS, InputSelection=0=DInPort, Index=1, DInputsMask=-1, TriggerType=0=CNC_TRIG_NONE, TriggerValue=0)
 	uplCNCWaitInput(A_AXIS, INPUT_SELECTION_DIGITAL, 1, ll:-1, CNC_TRIG_NONE, CNCAPushParam:0)
 
 // Type 22 / 23 spatial events
@@ -112,7 +112,7 @@ main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
 // uplMotionCNCLinear6 -> move all axes to 100000
 	uplMotionCNCLinear6(A_AXIS, ll:100000, B_AXIS, ll:100000, C_AXIS, ll:100000, D_AXIS, ll:100000, E_AXIS, ll:100000, F_AXIS, ll:100000, ll:20000, ll:0)
 
-	AMotorOn=1
+	AMotorOn=MOTOR_ON
 	BMotorOn=1
 	CMotorOn=1
 	DMotorOn=1

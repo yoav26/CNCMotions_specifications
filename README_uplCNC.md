@@ -25,10 +25,10 @@ All CNC segments are emitted to the CNC FIFO as:
   Configures automatic cornering behavior for ARC corners (radius/error model, angle threshold, and axis-acceleration limiting).
 
 - **Type 8 - DOUT Port Write** (`CNC_SEGMENT_TYPE_DOUTPORT_WRITE = 8`)  
-  Writes a digital output port value; `AxisRef_` is pushed as data (not encoded in involved-axis bits).
+  Writes a digital output port value; `lAxis_` is pushed as data (not encoded in involved-axis bits).
 
 - **Type 9 - Array Write** (`CNC_SEGMENT_TYPE_ARRAY_WRITE = 9`)  
-  Writes a value into a controller array. No axes are involved in `CNCAPushType`; `AxisRef_` is pushed as a normal parameter.
+  Writes a value into a controller array. No axes are involved in `CNCAPushType`; `lAxis_` is pushed as a normal parameter.
 
 - **Type 12 - Wait Using User Array** (`CNC_SEGMENT_TYPE_WAIT_ARRAY = 12`)  
   Waits, with all member axes in-position, until a trigger condition based on `GenData[]` or `UserParam[]` is satisfied.
@@ -65,7 +65,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplMotionCNCLinear1`  
   - **Axes**: exactly 1  
   - **Signature**:  
-    - `l:AxisRef1_` – axis index (`A_AXIS`, `B_AXIS`, …)  
+    - `l:lAxis1_` – axis index (`A_AXIS`, `B_AXIS`, …)  
     - `AbsTrgt:TrgtPos1_` – absolute target position (axis 1)  
     - `Speed:Speed_` – cruise speed  
     - `Speed:EndSpeed_` – end speed  
@@ -75,25 +75,25 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplMotionCNCLinear2`  
   - **Axes**: exactly 2  
   - **Signature**:  
-    - `l:AxisRef1_`, `AbsTrgt:TrgtPos1_`  
-    - `l:AxisRef2_`, `AbsTrgt:TrgtPos2_`  
+    - `l:lAxis1_`, `AbsTrgt:TrgtPos1_`  
+    - `l:lAxis2_`, `AbsTrgt:TrgtPos2_`  
     - `Speed:Speed_`, `Speed:EndSpeed_`  
   - **CNCAPushType**: type 1 + axis 1 in slot1, axis 2 in slot2, remaining via `TWOINV_UNUSED_MASK`  
   - **Params**: `TrgtPos1_`, `TrgtPos2_`, `Speed_`, `EndSpeed_`
 
 - **Function**: `uplMotionCNCLinear3`  
   - **Axes**: exactly 3  
-  - **Signature**: `AxisRef1_`, `TrgtPos1_`, `AxisRef2_`, `TrgtPos2_`, `AxisRef3_`, `TrgtPos3_`, `Speed_`, `EndSpeed_`  
+  - **Signature**: `lAxis1_`, `TrgtPos1_`, `lAxis2_`, `TrgtPos2_`, `lAxis3_`, `TrgtPos3_`, `Speed_`, `EndSpeed_`  
   - **CNCAPushType**: type 1 + axes in slots 1–3, `THREEINV_UNUSED_MASK` for remaining  
   - **Params**: `TrgtPos1_`, `TrgtPos2_`, `TrgtPos3_`, `Speed_`, `EndSpeed_`
 
 - **Function**: `uplMotionCNCLinear4`  
   - **Axes**: exactly 4  
   - **Signature**:  
-    - `l:AxisRef1_`, `AbsTrgt:TrgtPos1_`  
-    - `l:AxisRef2_`, `AbsTrgt:TrgtPos2_`  
-    - `l:AxisRef3_`, `AbsTrgt:TrgtPos3_`  
-    - `l:AxisRef4_`, `AbsTrgt:TrgtPos4_`  
+    - `l:lAxis1_`, `AbsTrgt:TrgtPos1_`  
+    - `l:lAxis2_`, `AbsTrgt:TrgtPos2_`  
+    - `l:lAxis3_`, `AbsTrgt:TrgtPos3_`  
+    - `l:lAxis4_`, `AbsTrgt:TrgtPos4_`  
     - `Speed:Speed_`, `Speed:EndSpeed_`  
   - **CNCAPushType**: type 1 + axes in slots 1–4, `FOURINV_UNUSED_MASK` for remaining  
   - **Params**: `TrgtPos1_`..`TrgtPos4_`, `Speed_`, `EndSpeed_`
@@ -101,11 +101,11 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplMotionCNCLinear5`  
   - **Axes**: exactly 5  
   - **Signature**:  
-    - `l:AxisRef1_`, `AbsTrgt:TrgtPos1_`  
-    - `l:AxisRef2_`, `AbsTrgt:TrgtPos2_`  
-    - `l:AxisRef3_`, `AbsTrgt:TrgtPos3_`  
-    - `l:AxisRef4_`, `AbsTrgt:TrgtPos4_`  
-    - `l:AxisRef5_`, `AbsTrgt:TrgtPos5_`  
+    - `l:lAxis1_`, `AbsTrgt:TrgtPos1_`  
+    - `l:lAxis2_`, `AbsTrgt:TrgtPos2_`  
+    - `l:lAxis3_`, `AbsTrgt:TrgtPos3_`  
+    - `l:lAxis4_`, `AbsTrgt:TrgtPos4_`  
+    - `l:lAxis5_`, `AbsTrgt:TrgtPos5_`  
     - `Speed:Speed_`, `Speed:EndSpeed_`  
   - **CNCAPushType**: type 1 + axes in slots 1–5, `FIVEINV_UNUSED_MASK` for remaining  
   - **Params**: `TrgtPos1_`..`TrgtPos5_`, `Speed_`, `EndSpeed_`
@@ -113,12 +113,12 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplMotionCNCLinear6`  
   - **Axes**: exactly 6  
   - **Signature**:  
-    - `l:AxisRef1_`, `AbsTrgt:TrgtPos1_`  
-    - `l:AxisRef2_`, `AbsTrgt:TrgtPos2_`  
-    - `l:AxisRef3_`, `AbsTrgt:TrgtPos3_`  
-    - `l:AxisRef4_`, `AbsTrgt:TrgtPos4_`  
-    - `l:AxisRef5_`, `AbsTrgt:TrgtPos5_`  
-    - `l:AxisRef6_`, `AbsTrgt:TrgtPos6_`  
+    - `l:lAxis1_`, `AbsTrgt:TrgtPos1_`  
+    - `l:lAxis2_`, `AbsTrgt:TrgtPos2_`  
+    - `l:lAxis3_`, `AbsTrgt:TrgtPos3_`  
+    - `l:lAxis4_`, `AbsTrgt:TrgtPos4_`  
+    - `l:lAxis5_`, `AbsTrgt:TrgtPos5_`  
+    - `l:lAxis6_`, `AbsTrgt:TrgtPos6_`  
     - `Speed:Speed_`, `Speed:EndSpeed_`  
   - **CNCAPushType**: type 1 + axes in all six slots (no unused mask macro)  
   - **Params**: `TrgtPos1_`..`TrgtPos6_`, `Speed_`, `EndSpeed_`
@@ -134,7 +134,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplCNCARrcMotion`  
   - **Axes**: 2 involved axes (plane of the arc)  
   - **Signature**:  
-    - `l:AxisRef1_`, `l:AxisRef2_` – plane axes  
+    - `l:lAxis1_`, `l:lAxis2_` – plane axes  
     - `AbsTrgt:TrgtPos1_`, `AbsTrgt:TrgtPos2_` – arc end position in the plane  
     - `AbsTrgt:CenterPos1`, `AbsTrgt:CenterPos2` – center location in the same plane  
     - `l:Dir` – direction (e.g. CW/CCW encoded)  
@@ -233,10 +233,10 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: write a digital output port value with an axis reference carried as parameter data.  
   - **Signature**:  
-    - `l:AxisRef_` – axis reference passed as parameter data  
+    - `l:lAxis_` – axis reference passed as parameter data  
     - `l:DOutPortValue_` – digital output port value to write  
   - **CNCAPushType**: type 8 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `AxisRef_`, `DOutPortValue_`
+  - **Params**: `lAxis_`, `DOutPortValue_`
 
 ## Array Write Segment (Type 9)
 
@@ -244,17 +244,17 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplCNCArrayWrite`  
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: write a value into a controller array entry.  
-  - **Special note**: `AxisRef_` is not encoded into the involved-axis bits; it is pushed as a normal parameter.  
+  - **Special note**: `lAxis_` is not encoded into the involved-axis bits; it is pushed as a normal parameter.  
   - **Signature**:  
-    - `l:AxisRef_` – axis reference passed as data for the array write; used for `UserParam[]` selection  
+    - `l:lAxis_` – axis reference passed as data for the array write; used for `UserParam[]` selection  
     - `l:ArrayType_` – array selection (`0` = `GenData[]`, `1` = `UserParam[]`; supported systems use `GenDataLL[]` and `UserParamLL[]`)  
     - `l:Index_` – target array index value  
     - `l:Value_` – value to write  
   - **CNCAPushType**: type 9 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `ArrayType_`, `AxisRef_`, `Index_`, `Value_`
+  - **Params**: `ArrayType_`, `lAxis_`, `Index_`, `Value_`
   - **Behavior when executed**:  
     - If `ArrayType_ = 0`: `GenData[Index_] = Value_`  
-    - If `ArrayType_ = 1`: `<AxisRef_>UserParam[Index_] = Value_`
+    - If `ArrayType_ = 1`: `<lAxis_>UserParam[Index_] = Value_`
 
 ## Wait Using User Array Segment (Type 12)
 
@@ -263,14 +263,14 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: when the CNC engine reaches this segment, it waits, in-position of all member axes, until the configured trigger condition is satisfied.  
   - **Signature**:  
-    - `l:AxisRef_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
+    - `l:lAxis_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
     - `l:ArrayType_` – array selection (`0` = `GenData[]`, `1` = `UserParam[]`)  
     - `l:Index_` – target array index value  
     - `l:TriggerType_` – trigger type selector  
     - `l:TriggerValue_` – trigger comparison value; ignored for `TriggerType_ = 8` but still must be pushed  
   - **CNCAPushType**: type 12 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `ArrayType_`, `AxisRef_`, `Index_`, `TriggerType_`, `TriggerValue_`
-  - **Ordering note**: function args are `AxisRef_`-first for convenience; pushed `Params` order is controller-defined.
+  - **Params**: `ArrayType_`, `lAxis_`, `Index_`, `TriggerType_`, `TriggerValue_`
+  - **Ordering note**: function args are `lAxis_`-first for convenience; pushed `Params` order is controller-defined.
 
 ### Trigger type values
 
@@ -287,7 +287,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 ### Wait behavior notes
 
 - `ArrayType_ = 0` refers to `GenData[]`, and `ArrayType_ = 1` refers to `UserParam[]`.
-- `AxisRef_` is used only for the `UserParam[]` case.
+- `lAxis_` is used only for the `UserParam[]` case.
 - The segment halts CNC segment execution for at least one sample time, even if the trigger condition is already met immediately or `TriggerType_ = 0`.
 
 ## Automatic Corner Motion Segment (Type 14)
@@ -297,7 +297,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 2 involved axes (`TWOINV_UNUSED_MASK`)  
   - **Purpose**: request the controller to insert an automatic corner motion between linear segments (corner behavior is configured by Type 6 Corner Params).  
   - **Signature**:  
-    - `l:AxisRef1_`, `l:AxisRef2_` – the two involved axes (must match previous motion segment involved axes)  
+    - `l:lAxis1_`, `l:lAxis2_` – the two involved axes (must match previous motion segment involved axes)  
   - **CNCAPushType**: type 14 + axis1 in slot1, axis2 in slot2, remaining via `TWOINV_UNUSED_MASK`  
   - **Params**: `ll:0` (Dummy1) … `ll:0` (Dummy10) — **10 total**, all must be `0`
 
@@ -314,13 +314,13 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: force multiple assignments of user-defined `GenData[]` or `UserParam[]` elements with user-defined values at the specific time when CNC motion reaches this segment.  
   - **Signature**:  
-    - `l:AxisRef_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
+    - `l:lAxis_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
     - `l:ArrayType_` – array selection (`0` = `GenData[]`, `1` = `UserParam[]`)  
     - `l:Index_` – starting array index value  
     - `l:Value1_`, `l:Value2_`, `l:Value3_`, `l:Value4_` – values written to four consecutive elements  
   - **CNCAPushType**: type 17 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `ArrayType_`, `AxisRef_`, `Index_`, `Value1_`, `Value2_`, `Value3_`, `Value4_`
-  - **Ordering note**: function args are `AxisRef_`-first for convenience; pushed `Params` order is controller-defined.
+  - **Params**: `ArrayType_`, `lAxis_`, `Index_`, `Value1_`, `Value2_`, `Value3_`, `Value4_`
+  - **Ordering note**: function args are `lAxis_`-first for convenience; pushed `Params` order is controller-defined.
 
 ### Behavior when executed
 
@@ -330,10 +330,10 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - `GenData[Index_ + 2] = Value3_`
   - `GenData[Index_ + 3] = Value4_`
 - If `ArrayType_ = 1`:
-  - `<AxisRef_>UserParam[Index_] = Value1_`
-  - `<AxisRef_>UserParam[Index_ + 1] = Value2_`
-  - `<AxisRef_>UserParam[Index_ + 2] = Value3_`
-  - `<AxisRef_>UserParam[Index_ + 3] = Value4_`
+  - `<lAxis_>UserParam[Index_] = Value1_`
+  - `<lAxis_>UserParam[Index_ + 1] = Value2_`
+  - `<lAxis_>UserParam[Index_ + 2] = Value3_`
+  - `<lAxis_>UserParam[Index_ + 3] = Value4_`
 
 ## Multiple Write to User Array and Wait Using User Array Segment (Type 18)
 
@@ -342,7 +342,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: first performs multiple assignments to `GenData[]` or `UserParam[]` (same as Type 17), then waits in-position of all member axes until trigger condition is satisfied.  
   - **Signature**:  
-    - `l:AxisRef_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
+    - `l:lAxis_` – axis identification used for `UserParam[]` only (`0` = A axis, `1` = B axis, and so on)  
     - `l:ArrayType_` – array selection (`0` = `GenData[]`, `1` = `UserParam[]`)  
     - `l:Index_` – starting index value for write operations  
     - `l:Value1_`, `l:Value2_`, `l:Value3_`, `l:Value4_` – values written to four consecutive elements  
@@ -350,8 +350,8 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
     - `l:TriggerType_` – trigger type selector  
     - `l:TriggerValue_` – trigger comparison value; ignored for `TriggerType_ = 8` but must still be pushed  
   - **CNCAPushType**: type 18 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `ArrayType_`, `AxisRef_`, `Index_`, `Value1_`, `Value2_`, `Value3_`, `Value4_`, `TriggerIndex_`, `TriggerType_`, `TriggerValue_`
-  - **Ordering note**: function args are `AxisRef_`-first for convenience; pushed `Params` order is controller-defined.
+  - **Params**: `ArrayType_`, `lAxis_`, `Index_`, `Value1_`, `Value2_`, `Value3_`, `Value4_`, `TriggerIndex_`, `TriggerType_`, `TriggerValue_`
+  - **Ordering note**: function args are `lAxis_`-first for convenience; pushed `Params` order is controller-defined.
 
 ### Behavior when executed
 
@@ -362,10 +362,10 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
     - `GenData[Index_ + 2] = Value3_`
     - `GenData[Index_ + 3] = Value4_`
   - If `ArrayType_ = 1`:
-    - `<AxisRef_>UserParam[Index_] = Value1_`
-    - `<AxisRef_>UserParam[Index_ + 1] = Value2_`
-    - `<AxisRef_>UserParam[Index_ + 2] = Value3_`
-    - `<AxisRef_>UserParam[Index_ + 3] = Value4_`
+    - `<lAxis_>UserParam[Index_] = Value1_`
+    - `<lAxis_>UserParam[Index_ + 1] = Value2_`
+    - `<lAxis_>UserParam[Index_ + 2] = Value3_`
+    - `<lAxis_>UserParam[Index_ + 3] = Value4_`
 - Then waits according to trigger definitions, using the same selected array (`GenData[]` or `UserParam[]`) with `TriggerIndex_`.
 
 ### Trigger type values
@@ -392,13 +392,13 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Purpose**: when this segment is reached, the CNC engine waits (in-position of all member axes) until the configured trigger condition is satisfied based on selected input source.  
   - **Signature**:  
     - `l:InputSelection_` – input selection (`0` = `DInPort`, `1` = `AInPort`)  
-    - `l:AxisRef_` – axis identification (`0` = A axis, `1` = B axis, and so on)  
+    - `l:lAxis_` – axis identification (`0` = A axis, `1` = B axis, and so on)  
     - `l:Index_` – index used for `AInPort[Index_]` (used for `AInPort` only; must be greater than 0)  
     - `ll:DInputsMask_` – mask applied to `DInPort` before trigger check (used for `DInPort` only; default value `-1`)  
     - `l:TriggerType_` – trigger type selector  
     - `l:TriggerValue_` – trigger comparison value; ignored for `TriggerType_ = 8` but still must be pushed  
   - **CNCAPushType**: type 21 + no involved axes (`NONINV_UNUSED_MASK`)  
-  - **Params**: `InputSelection_`, `AxisRef_`, `Index_`, `DInputsMask_`, `TriggerType_`, `TriggerValue_`
+  - **Params**: `InputSelection_`, `lAxis_`, `Index_`, `DInputsMask_`, `TriggerType_`, `TriggerValue_`
 
 ### Input and trigger semantics
 
@@ -502,7 +502,7 @@ These helpers manipulate CNC control flags/keywords rather than emitting motion 
 
 ## Notes and Conventions
 
-- All axis references (`AxisRef#_`, `EventAxis_`) are integer indices; use the predefined `*_AXIS` constants where possible.
+- All axis references (`lAxis#_`, `EventAxis_`) are integer indices; use the predefined `*_AXIS` constants where possible.
 - All absolute target positions (`AbsTrgt:*`) are expressed in **user units**.
 - When adding new segment types, follow the same pattern:
   - Define a `CNC_SEGMENT_TYPE_*` constant in `uplCNC.puh2`.
