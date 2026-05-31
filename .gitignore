@@ -1,5 +1,7 @@
-*.h
+# Agito / UPL compiler outputs (regenerate locally)
 *.cup2
 *.cupb2
 *.puj2
-*.md
+
+# Tool-generated define map (from UPL build)
+CNCMotions_specifications_DefineVars.h
