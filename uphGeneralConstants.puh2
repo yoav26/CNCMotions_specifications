@@ -88,17 +88,17 @@
 #define	DOUT_IN_ACCELERATION											4
 #define	DOUT_IN_DECELERATION											5
 #define	DOUT_IN_CONSTANT_SPEED											6
-#define	DOUT_END_OF_MOTION												7	// TODO: Not implemented
+
 #define	DOUT_IN_TARGET													8
 #define	DOUT_ALARM														9
-#define	DOUT_WARNINGS_IN_LAST_MOTION									10	// TODO: Not implemented
-#define	DOUT_SATURATIONS_IN_LAST_MOTION									11	// TODO: Not implemented
+
+
 #define	DOUT_RLS_FLS_ACTIVE												12
 #define	DOUT_OUT_OF_TRAVEL												13
 #define	DOUT_REGENERATION_ACTIVE										14
 #define	DOUT_DYNAMIC_BRAKE_ACTIVE										15
 #define	DOUT_STATIC_BRAKE_LOCK											16
-#define	DOUT_STATIC_UNUSED												17	// used by BIOEXTRME as watchdog
+#define	DOUT_STATIC_UNUSED												17
 #define	DOUT_RLS_ACTIVE													18
 #define	DOUT_FLS_ACTIVE													19
 #define DOUT_HOMING_STAT                                                20
@@ -172,8 +172,6 @@
 
 
 // Controller Fault (ConFlt) definitions and bits
-//remove-#define	CON_FLT_NONE													0							//"No fault has occurred"
-//remove-#define CON_FLT_BASE                                                    1000                        //Base from which ConFlt is incremented
 #define	CON_FLT_ABORT													1001						//"Abort signal was detected"
 #define	CON_FLT_SHORT													1002						//"Short from motor phase to ground"
 #define	CON_FLT_ENCODER_ERROR											1003						//"Encoder error (disconnected or other errors)"

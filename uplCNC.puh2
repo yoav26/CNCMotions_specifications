@@ -2,7 +2,7 @@
 // uplCNC.puh2
 // -------------------------------------
 // 
-// Motion Functions file. Includes the Motions functions:
+// CNC library header. Segment-type constants and CNC-related defines.
 // version:    1.2.0
 // 
 // for more info, review README_uplCNC.md

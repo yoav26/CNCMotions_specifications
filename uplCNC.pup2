@@ -166,7 +166,7 @@ endoffunc
 // -- Dir                     : arc direction (CW/CCW encoding per controller)
 // -- cruise_speed            : cruise speed along the path [user-units / sec]
 // -- end_speed               : end-of-segment speed [user-units / sec]
-function: uplCNCARrcMotion(l:lAxis1_, l:lAxis2_,
+function: uplCNCArcMotion(l:lAxis1_, l:lAxis2_,
 							AbsTrgt:TrgtPos1_, AbsTrgt:TrgtPos2_,
 							AbsTrgt:CenterPos1, AbsTrgt:CenterPos2, ll:Dir,
 							Speed:cruise_speed, Speed:end_speed)
@@ -324,7 +324,7 @@ function: uplCNCAutomaticCornerMotion(l:lAxis1_, l:lAxis2_)
 
 	ACNCAPushType, (CNC_SEGMENT_TYPE_AUTOMATIC_CORNER << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
 	
-	ACNCAPushParam, CNCAPushParam:0 // Dummy1 // TODO change all types to be dynamic. 
+	ACNCAPushParam, CNCAPushParam:0 // Dummy1
 	ACNCAPushParam, ll:0	// Dummy2
 	ACNCAPushParam, ll:0	// Dummy3
 	ACNCAPushParam, ll:0	// Dummy4
@@ -433,8 +433,8 @@ endoffunc
 // Number of involved axes: 0 (exactly)
 // Params: InputSelection, AxisIdentification, IndexValue, DInputsMask, TriggerType, TriggerValue
 // Func. args:
+// -- lAxis_          : axis identification (0 = A axis, 1 = B axis, and so on)
 // -- InputSelection_ : input selection (0 = DInPort, 1 = AInPort)
-// -- lAxis_        : axis identification (0 = A axis, 1 = B axis, and so on)
 // -- Index_          : AInPort index value (used for AInPort only, must be > 0)
 // -- DInputsMask_    : bit-mask for DInPort trigger check (used for DInPort only, default -1)
 // -- TriggerType_    : 0=None, 1=GreaterThan, 2=EqualTo, 3=NotEqualTo, 4=SmallerThan,
@@ -532,10 +532,9 @@ function: uplCNCSpatialEvents(l:NumEvents_,
 endoffunc
 
 
-//<TODO>:
-// --- Type 1: Linear — Unified function (1–6 involved axes)
+// CNC runtime control (non-segment helpers)
 
-// change speed on-the-fly with CNCAPercents
+// Change speed on-the-fly with CNCAPercents
 function: uplCNCSetSpeedPercent(l:percent_)
 
 	ACNCAPercents = percent_
@@ -558,7 +557,7 @@ function: uplCNCPause()
 endoffunc
 
 
-// Resume CNC Motion (CNCAPause)
+// Resume CNC Motion (clear CNCAPause)
 function: uplCNCResume()
 
 	ACNCAPause = 0

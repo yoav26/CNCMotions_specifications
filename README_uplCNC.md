@@ -131,7 +131,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 ## Arc Motion Segment (Type 2)
 
 - **Segment type**: `CNC_SEGMENT_TYPE_ARC = 2`
-- **Function**: `uplCNCARrcMotion`  
+- **Function**: `uplCNCArcMotion`  
   - **Axes**: 2 involved axes (plane of the arc)  
   - **Signature**:  
     - `l:lAxis1_`, `l:lAxis2_` – plane axes  
@@ -142,7 +142,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
     - `Speed:end_speed` – end‑of‑segment speed  
   - **CNCAPushType**: type 2 + axis1 in slot1, axis2 in slot2, remaining via `TWOINV_UNUSED_MASK`  
   - **Params** (in order):  
-    - `TrgtPos1_`, `TrgtPos2_`, `CenterPos1`, `CenterPos2`, `Dir`, `cruise_speed`, `end_speed`, `ll:0` (no additional cycles), `ll:0` (Dummy1), `ll:0` (Dummy2)
+    - `TrgtPos1_`, `TrgtPos2_`, `CenterPos1`, `CenterPos2`, `Dir`, `cruise_speed`, `end_speed`, `ll:0` (no additional cycles), `CNCAPushParam:0` (Dummy1), `ll:0` (Dummy2)
 
 
 ## Vector Parameter Segment (Type 5)
@@ -151,10 +151,10 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
 - **Function**: `uplCNCSetVectorParams`  
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Signature**:  
-    - `f:SpeedPercentsInternal_` – internal speed percentage  
-    - `f:VectorAcceleration_` – vector acceleration \([user‑units / sec²]\)  
-    - `f:VectorDeceleration_` – vector deceleration \([user‑units / sec²]\)  
-    - `f:VectorJerk_` – vector jerk \([user‑units / sec³]\)  
+    - `CNCAPushParam:SpeedPercentsInternal_` – internal speed percentage  
+    - `CNCAPushParam:VectorAcceleration_` – vector acceleration \([user‑units / sec²]\)  
+    - `CNCAPushParam:VectorDeceleration_` – vector deceleration \([user‑units / sec²]\)  
+    - `CNCAPushParam:VectorJerk_` – vector jerk \([user‑units / sec³]\)  
   - **Params**: `SpeedPercentsInternal_`, `VectorAcceleration_`, `VectorDeceleration_`, `VectorJerk_`
 
 ## Corner Parameter Segment (Type 6)
@@ -299,7 +299,7 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Signature**:  
     - `l:lAxis1_`, `l:lAxis2_` – the two involved axes (must match previous motion segment involved axes)  
   - **CNCAPushType**: type 14 + axis1 in slot1, axis2 in slot2, remaining via `TWOINV_UNUSED_MASK`  
-  - **Params**: `ll:0` (Dummy1) … `ll:0` (Dummy10) — **10 total**, all must be `0`
+  - **Params**: `CNCAPushParam:0` (Dummy1), `ll:0` (Dummy2) … `ll:0` (Dummy10) — **10 total**, all must be `0`
 
 ### Controller validation checks
 
@@ -391,14 +391,15 @@ Uninvolved axis slots are filled using the appropriate `*_UNUSED_MASK` macro.
   - **Axes**: 0 involved axes (`NONINV_UNUSED_MASK`)  
   - **Purpose**: when this segment is reached, the CNC engine waits (in-position of all member axes) until the configured trigger condition is satisfied based on selected input source.  
   - **Signature**:  
-    - `l:InputSelection_` – input selection (`0` = `DInPort`, `1` = `AInPort`)  
     - `l:lAxis_` – axis identification (`0` = A axis, `1` = B axis, and so on)  
+    - `l:InputSelection_` – input selection (`0` = `DInPort`, `1` = `AInPort`)  
     - `l:Index_` – index used for `AInPort[Index_]` (used for `AInPort` only; must be greater than 0)  
     - `ll:DInputsMask_` – mask applied to `DInPort` before trigger check (used for `DInPort` only; default value `-1`)  
     - `l:TriggerType_` – trigger type selector  
-    - `l:TriggerValue_` – trigger comparison value; ignored for `TriggerType_ = 8` but still must be pushed  
+    - `CNCAPushParam:TriggerValue_` – trigger comparison value; ignored for `TriggerType_ = 8` but still must be pushed  
   - **CNCAPushType**: type 21 + no involved axes (`NONINV_UNUSED_MASK`)  
   - **Params**: `InputSelection_`, `lAxis_`, `Index_`, `DInputsMask_`, `TriggerType_`, `TriggerValue_`
+  - **Ordering note**: function args are `lAxis_`-first for convenience; pushed `Params` order is controller-defined.
 
 ### Input and trigger semantics
 

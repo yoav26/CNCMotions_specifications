@@ -12,8 +12,8 @@
 #include uplMotion.puh2
 #include uplUtility.puh2
 // 
-#information   Replace this with information about your program
-#information   Multiple info lines can be placed
+#information   CNCMotions specifications — integration demo for uplCNC segment helpers
+#information   See README_uplCNC.md and README_Integration_Example.md
 // 
 // Main task (Task 1)
 // ------------------
@@ -73,8 +73,8 @@ main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
 // uplMotionCNCLinear2(A=0, B=0, Speed=20000, EndSpeed=0) -> goes to zero
 	uplMotionCNCLinear2(A_AXIS, ll:0, B_AXIS, ll:0, ll:20000, ll:0)
 
-// uplCNCARrcMotion(A,B) end targets (100000,0), center (50000,0), Dir=0, cruise=20000, end=0
-	uplCNCARrcMotion(A_AXIS, B_AXIS, ll:100000, ll:0, ll:50000, ll:0, ll:0, ll:20000, ll:0)
+// uplCNCArcMotion(A,B) end targets (100000,0), center (50000,0), Dir=0, cruise=20000, end=0
+	uplCNCArcMotion(A_AXIS, B_AXIS, ll:100000, ll:0, ll:50000, ll:0, ll:0, ll:20000, ll:0)
 
 // uplCNCSetSpeedPercent(200)
 	uplCNCSetSpeedPercent(200)
