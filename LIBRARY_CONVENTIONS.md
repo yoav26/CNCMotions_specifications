@@ -9,7 +9,9 @@ This document is the single source of truth for conventions used in this library
 - `uplUtility.pup2`
 - `uplCNC.puh2`
 - `uplCNC.pup2`
-- module readmes (currently `README_uplCNC.md`)
+- `uplIO.puh2`
+- `uplIO.pup2`
+- module readmes (currently `README_uplCNC.md`, `README_uplIO.md`)
 
 ---
 
@@ -18,10 +20,12 @@ This document is the single source of truth for conventions used in this library
 - **Header files** use `*.puh2`; implementation files use `*.pup2`.
 - **UPL library files** use `upl*` prefix.
 - **General shared constants file** uses `uph*` prefix.
-- **Function names** use module prefix and descriptive action:
-  - Motion: `uplMotion...`
+- **Function names** use module prefix, controller keyword, then action:
+  - Pattern: `upl<Module><Keyword><Action>` (no separators)
+  - I/O examples: `uplIODInPortRead`, `uplIODOutPortWrite`, `uplIODInModeSet`
+  - Motion: `uplMotion...` (legacy; migrate to keyword pattern when touched)
   - Utility: `upl...` (utility scope)
-  - CNC: `uplCNC...`
+  - CNC: `uplCNC...` (segment-oriented; `uplCNCDOutPortWrite` already matches keyword + action)
 - **Constants/macros** use `UPPER_SNAKE_CASE`.
 - **Function parameters** use trailing underscore (`_`), e.g. `lAxis_`, `ArrayType_`, `TriggerValue_`.
 - **Axis arguments** should use `lAxis_` naming consistently across CNC/Motion/Utility APIs unless a function already has an established public signature.
@@ -65,6 +69,9 @@ Example:
 
 ## 6) Comments and Documentation Format
 
+- **UPL control flow** (IDE/compiler grammar):
+  - Use `if` / `else` / `end` — do not chain `else if` with multiple `end` blocks.
+  - For multi-way integer dispatch (e.g. trigger type selectors), prefer `switch` / `case` / `break` / `default` / `end`.
 - Header banner first line must match actual file name exactly.
 - Use consistent section labels:
   - `Segment type value`
@@ -81,12 +88,13 @@ Example:
 
 - **Global/common constants** belong in `uphGeneralConstants.puh2`:
   - Axis IDs (`A_AXIS`...`H_AXIS`)
-  - Platform-wide IO/event/fault constants
+  - Platform-wide IO/event/fault constants (`DINMODE_*`, `DOUTMODE_*`, `DOUTTYPE_*`, port bit masks)
   - Any cross-module enums/macros reused by multiple modules
 - **Module-specific constants** belong in module headers:
   - `uplMotions.puh2`: motion-library-local constants (e.g., wait status aliases used by motion helpers)
   - `uplUtility.puh2`: utility-local constants (e.g., motor on/off helpers)
-  - `uplCNC.puh2`: CNC segment IDs, masks, CNC trigger/input/array type constants
+  - `uplIO.puh2`: I/O module header (no module-local `#define`s; shared constants in `uphGeneralConstants.puh2`)
+  - `uplCNC.puh2`: CNC segment IDs, masks, CNC wait-segment trigger/input/array type constants (`CNC_TRIG_*`)
 - Avoid duplicate active definitions across files unless aliasing is intentional and documented.
 
 ## 8) Versioning Convention

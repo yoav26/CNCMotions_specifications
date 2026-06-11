@@ -10,7 +10,7 @@
 
 
 #include uphGeneralConstants.puh2
-#include uplMotion.puh2
+//#include uplMotion.puh2
 #include uplCNC.puh2
 
 
@@ -325,15 +325,15 @@ function: uplCNCAutomaticCornerMotion(l:lAxis1_, l:lAxis2_)
 	ACNCAPushType, (CNC_SEGMENT_TYPE_AUTOMATIC_CORNER << 24) | ((lAxis1_ & 0xF) << 20) | ((lAxis2_ & 0xF) << 16) | TWOINV_UNUSED_MASK
 	
 	ACNCAPushParam, CNCAPushParam:0 // Dummy1
-	ACNCAPushParam, ll:0	// Dummy2
-	ACNCAPushParam, ll:0	// Dummy3
-	ACNCAPushParam, ll:0	// Dummy4
-	ACNCAPushParam, ll:0	// Dummy5
-	ACNCAPushParam, ll:0	// Dummy6
-	ACNCAPushParam, ll:0	// Dummy7
-	ACNCAPushParam, ll:0	// Dummy8
-	ACNCAPushParam, ll:0	// Dummy9
-	ACNCAPushParam, ll:0	// Dummy10
+	ACNCAPushParam, CNCAPushParam:0	// Dummy2
+	ACNCAPushParam, CNCAPushParam:0	// Dummy3
+	ACNCAPushParam, CNCAPushParam:0	// Dummy4
+	ACNCAPushParam, CNCAPushParam:0	// Dummy5
+	ACNCAPushParam, CNCAPushParam:0	// Dummy6
+	ACNCAPushParam, CNCAPushParam:0	// Dummy7
+	ACNCAPushParam, CNCAPushParam:0	// Dummy8
+	ACNCAPushParam, CNCAPushParam:0	// Dummy9
+	ACNCAPushParam, CNCAPushParam:0	// Dummy10
 	
 endoffunc
 

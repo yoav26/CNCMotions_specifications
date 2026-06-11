@@ -1,0 +1,170 @@
+// 
+// uplIO.pup2
+// -------------------------------------
+// 
+// I/O Functions file. Immediate axis-scoped digital/analog I/O.
+// 
+// Naming: uplIO + <controller keyword> + <action>
+//   e.g. uplIODInPortRead, uplIODOutPortWrite, uplIODInModeSet
+// 
+// Digital keywords: DInPort, DInLog, DInMode, DOutPort, DOutLog, DOutMode,
+//                  DOutSelect, DOutType
+//
+// NOTE: Functions modify AChooseAxis[AProgThread] according to lAxis_.
+// On single-axis drives, use A_AXIS only.
+//
+// Maintainer: Yoav
+// Created at: 06/01/2026
+// version:    1.6.0
+//
+
+
+#include uphGeneralConstants.puh2
+#include uplIO.puh2
+
+
+// --- DInPort (32-bit port; bit0 = input #1) ---
+
+function: l:DInPortValue_ = uplIODInPortRead(l:lAxis_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DInPortValue_ = PDInPort
+	
+endoffunc
+
+
+// --- DInLog (32-bit port; bit0 = input #1) ---
+
+function: l:DInLogValue_ = uplIODInLogRead(l:lAxis_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DInLogValue_ = PDInLog
+	
+endoffunc
+
+
+// --- DInMode[] (32 elements; index 1 = input #1) ---
+
+function: uplIODInModeSet(l:lAxis_, l:InputIndex_, l:Mode_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDInMode[InputIndex_] = Mode_
+	
+endoffunc
+
+
+// --- DOutPort (32-bit port; bit0 = output #1) ---
+
+function: l:DOutPortValue_ = uplIODOutPortRead(l:lAxis_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DOutPortValue_ = PDOutPort
+	
+endoffunc
+
+
+function: uplIODOutPortWrite(l:lAxis_, l:DOutPortValue_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutPort = DOutPortValue_
+	
+endoffunc
+
+
+function: uplIODOutPortSetBits(l:lAxis_, l:BitMask_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutPort = PDOutPort | BitMask_
+	
+endoffunc
+
+
+function: uplIODOutPortClearBits(l:lAxis_, l:BitMask_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutPort = PDOutPort & BitMask_
+	
+endoffunc
+
+
+function: uplIODOutPortToggleBits(l:lAxis_, l:BitMask_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutPort = PDOutPort ^ BitMask_
+	
+endoffunc
+
+
+// --- DOutLog (32-bit port; bit0 = output #1) ---
+
+function: l:DOutLogValue_ = uplIODOutLogRead(l:lAxis_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DOutLogValue_ = PDOutLog
+	
+endoffunc
+
+
+// --- DOutMode[] (32 elements; index 1 = output #1) ---
+
+function: uplIODOutModeSet(l:lAxis_, l:OutputIndex_, l:Mode_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutMode[OutputIndex_] = Mode_
+	
+endoffunc
+
+
+// --- DOutSelect[] (16 elements; index 1 = output #1) ---
+
+function: l:DOutSelectValue_ = uplIODOutSelectRead(l:lAxis_, l:SelectIndex_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DOutSelectValue_ = PDOutSelect[SelectIndex_]
+	
+endoffunc
+
+
+function: uplIODOutSelectWrite(l:lAxis_, l:SelectIndex_, l:SelectValue_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutSelect[SelectIndex_] = SelectValue_
+	
+endoffunc
+
+
+// --- DOutType (32-bit port; per-bit 0=SINK, 1=SOURCE; bit0 = output #1) ---
+
+function: l:DOutTypeValue_ = uplIODOutTypeRead(l:lAxis_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	DOutTypeValue_ = PDOutType
+	
+endoffunc
+
+
+function: uplIODOutTypeWrite(l:lAxis_, l:DOutTypeValue_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PDOutType = DOutTypeValue_
+	
+endoffunc
+
+
+// --- AInMode[] / AInPort[] (analog; deferred detail — index 1-based) ---
+
+function: uplIOAInModeSet(l:lAxis_, l:InputIndex_, l:Mode_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	PAInMode[InputIndex_] = Mode_
+	
+endoffunc
+
+
+function: f:AInValue_ = uplIOAInPortRead(l:lAxis_, l:Index_)
+	
+	AChooseAxis[AProgThread] = lAxis_
+	AInValue_ = PAInPort[Index_]
+	
+endoffunc
+

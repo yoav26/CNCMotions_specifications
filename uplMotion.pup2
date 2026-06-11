@@ -57,7 +57,7 @@ function: uplMotionPTPRelative(l:lAxis_, RelTrgt:TargetPos_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotionMode = MOTION_MODE_PTP 
+	PMotionMode = MOTIONMODE_PTP 
 	PRelTrgt 	= TargetPos_	
 	
 	PBegin
@@ -73,7 +73,7 @@ function: uplMotionPTPAbsolute(l:lAxis_, AbsTrgt:TargetPos_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotionMode = MOTION_MODE_PTP 
+	PMotionMode = MOTIONMODE_PTP 
 	PAbsTrgt 	= TargetPos_
 	
 	PBegin
@@ -90,7 +90,7 @@ function: uplMotionPTPRelativeRep(l:lAxis_, RelTrgt:TargetPos_, l:lRepWait_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotionMode = MOTION_MODE_PTP_REP
+	PMotionMode = MOTIONMODE_PTP_REP
 	PRptWait 	= lRepWait_
 	PRelTrgt 	= TargetPos_ 			
 	
@@ -108,7 +108,7 @@ function: uplMotionPTPAbsoluteRep(l:lAxis_, AbsTrgt:TargetPos_, l:lRepWait_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotionMode = MOTION_MODE_PTP_REP
+	PMotionMode = MOTIONMODE_PTP_REP
 	PRptWait 	= lRepWait_
 	PAbsTrgt 	= TargetPos_
 	
@@ -125,7 +125,7 @@ function: uplMotionJOG(l:lAxis_, Speed:Speed_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotionMode = MOTION_MODE_JOG
+	PMotionMode = MOTIONMODE_JOG
 	PSpeed   	= Speed_
 	
 	PBegin

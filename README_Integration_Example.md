@@ -1,6 +1,6 @@
 ## End-to-End Integration Example
 
-This example shows combined usage of Utility + Motion + CNC modules.
+This example shows combined usage of Utility + Motion + CNC modules. For immediate I/O (outside CNC FIFO), see `README_uplIO.md`.
 
 ```txt
 // 1) Prepare axis/motor

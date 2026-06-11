@@ -26,7 +26,7 @@ function: uplMotorOn(l:lAxis_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotorOn = MOTOR_ON
+	PMotorOn = MOTORON_ON
 	
 endoffunc
 
@@ -38,7 +38,7 @@ function: uplMotorOff(l:lAxis_)
 	
 	AChooseAxis[AProgThread] = lAxis_
 	
-	PMotorOn = MOTOR_OFF
+	PMotorOn = MOTORON_OFF
 	
 endoffunc
 

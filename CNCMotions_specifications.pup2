@@ -8,6 +8,7 @@
 // 
 #include CNCMotions_specifications.puh2
 #include uplCNC.puh2
+#include uplIO.puh2
 #include uphGeneralConstants.puh2
 #include uplMotion.puh2
 #include uplUtility.puh2
@@ -23,7 +24,7 @@
 // Dynamic allocation ranges: [Tasks],[Functions],[#definevar],[#definevar:f],[#definevar:l],[#definevar:d]
 //
 
-main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
+main([10,30],[5,55],[800,1000],[50,100],[50,100],[50,100])
 	
 	
 	for (aaxis=0; aaxis<5; aaxis++)
@@ -99,6 +100,13 @@ main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
 // uplCNCWaitInput(lAxis=A_AXIS, InputSelection=0=DInPort, Index=1, DInputsMask=-1, TriggerType=0=CNC_TRIG_NONE, TriggerValue=0)
 	uplCNCWaitInput(A_AXIS, INPUT_SELECTION_DIGITAL, 1, ll:-1, CNC_TRIG_NONE, CNCAPushParam:0)
 
+// Immediate I/O (non-CNC) on A axis — see README_uplIO.md
+// uplIODOutModeSet(A_AXIS, 1, DOUTMODE_USER_OUTPUT)
+// uplIODOutPortWrite(A_AXIS, 0)
+// uplIODOutPortSetBits(A_AXIS, DOUTPORT_DOUT1_SET)
+// l:din = uplIODInPortRead(A_AXIS)
+// l:dlog = uplIODInLogRead(A_AXIS)
+
 // Type 22 / 23 spatial events
 // uplCNCSpatialEventsSetup(EventAxis=A_AXIS(0=A physical), IsVirtualAxis=0, IsPreconfiguredTbl=0, PulseResolution=1, PulseWidth=10, EventSelect=0)
 	uplCNCSpatialEventsSetup(A_AXIS, 0, 0, 1, 10, 0)
@@ -112,7 +120,7 @@ main([10,30],[5,39],[800,1000],[50,100],[50,100],[50,100])
 // uplMotionCNCLinear6 -> move all axes to 100000
 	uplMotionCNCLinear6(A_AXIS, ll:100000, B_AXIS, ll:100000, C_AXIS, ll:100000, D_AXIS, ll:100000, E_AXIS, ll:100000, F_AXIS, ll:100000, ll:20000, ll:0)
 
-	AMotorOn=MOTOR_ON
+	AMotorOn=MOTORON_ON
 	BMotorOn=1
 	CMotorOn=1
 	DMotorOn=1

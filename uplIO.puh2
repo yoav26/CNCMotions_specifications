@@ -1,0 +1,21 @@
+
+// uplIO.puh2
+// -------------------------------------
+// 
+// I/O Header file. Module-local constants for immediate (non-CNC) axis I/O.
+// 
+// Maintainer: Yoav
+
+// Created at: 01/06/2026
+
+// version:    1.6.0
+//
+// -------------------------------------
+
+// Immediate digital/analog I/O on a per-axis basis (A_AXIS..H_AXIS).
+
+// For motion-synchronized I/O, use uplCNC (uplCNCDOutPortWrite, uplCNCWaitInput).
+
+// Shared constants (DINMODE_*, DOUTMODE_*, DOUTTYPE_*, DINPORT_*, DOUTPORT_*)
+// are in uphGeneralConstants.puh2.
+
